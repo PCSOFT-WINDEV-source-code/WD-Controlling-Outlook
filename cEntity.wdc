@@ -1,0 +1,173 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : cEntity
+ major_version : 28
+ minor_version : 0
+ type : 4
+ description : ""
+ subtype : 0
+class :
+ identifier : 0x14f5dd5c053c2f42
+ internal_properties : CAAAAAgAAAB2/vstTMCJbS/hlxjFxirSqKvCUuv8YxgpWyl7S3iA
+ code_elements :
+  internal_properties : CAAAAAgAAABm4PVFe9JAHaoZ7pWrapr167xJBrSdz0axAnnnfYhOQaaZf6aFmw+87+hdnze0968KI3y7g0wMbri74fT3L3UE/39pGg==
+  type_code : 10
+  p_codes :
+   -
+     internal_properties : CAAAAAgAAABTjT0ZiT+j1AokcN5US63JMH5tiKw1fVzSvZEPlg2fJ/QQt/J+S9ovlcU5OShAX2EfxJbt7iexQqADD+YpwhUamEw/opKoiLzh6fSaY6cFYxaWUNR9lKcYQX/aTYN/Cxc6l1/cnbT37o9y32cmyhdROxCdMz/MiEPxragjTZr557daB+7RXBk09ndLgGdOlA==
+     code : |1+
+      //Class used to manage an entity of Outlook: a given email, a given contact, a given task.. 
+      cEntity is Class 
+      	inhérits of cOutlook
+      	
+      	m_clList is cListEntities dynamic 		//Used to go back to the list to which the email, the contact or the task belongs 
+      	//for the updates especially after modification, deletion or addition
+      	
+      END
+     type : 131072
+  procedures :
+   -
+     name : Constructor
+     internal_properties : CAAAAAgAAAAiBDJ/GcYT0NKHQCgwYBofINB1yMM9zYS1tKofv3G82GRJPeLShV9vW0lXqJ1SoALJpAwdExgFG24EP4I9UEjSfwGFiRRRsF2JMp7eDBvnfa9hWAhjAnJSSUqbnNc+LyWCFAxC6isaAuMKez8GINgU7AdUJ+ARrYfpEntMp4S1rQXkWxMDNifVw3RsaAbXYOjyW5qzgw==
+     procedure_id : 1510356637347295042
+     type_code : 27
+     code : |1+
+      PROCEDURE Constructor(sFolder, MyItem = Null)
+      
+      // Call to the constructor of the parent class
+      // to initialize the dialog with Outlook
+      Constructor cOutlook(sFolder, MyItem)
+      
+     type : 589824
+   -
+     name : Destructor
+     procedure_id : 1510356637347360578
+     type_code : 28
+     code : |1+
+      PROCEDURE Destructor()
+      
+     type : 655360
+   -
+     name : Modify
+     internal_properties : CAAAAAgAAABgp22Y/RThNPx/diE2v3qtBrhG1VduaA9CSSwimkRFwcnppeaXUdxKBl2LREZ35WIhXWCNcxegMQ239drZrgV8ZlMeRklGa2ZOaJItsrSbSPS91GSzzjjwHozTyFpElxw4LiP+3Ov6VTSMhq1LH0tk2YDhUPynxKREQFfLOJ2UzDzuw5rfK7BSilS1rPIDBnhTK8SQjeQ108tL1sMxKMnIA467H+GyBorU0KHehyPhOdg=
+     procedure_id : 1510356637347426114
+     type_code : 12
+     code : |1-
+      // Summary: Modify an element in Outlook according to its identifier
+      // Syntax:
+      // Modify (<sID>)
+      //
+      // Parameters:
+      // 	sID: Identifier of the element in Outlook
+      // Return value:
+      // 	None
+      
+      PROCEDURE Modify(sID)
+      
+      WHEN EXCEPTION IN
+      	:m_pautItem = :m_pautNameSpace>>GetItemFromID(sID)
+      	IF NOT :m_pautItem=Null THEN
+      		:AllocateProperties()
+      		:m_pautItem>>Save()
+      	END
+      	delete :m_pautItem
+      	
+      	// Update the list of items in memory, by calling the method for updating the list to which the element belongs
+      	:m_clList:LoadItems()
+      	
+      DO
+      	Error(ExceptionInfo(errSummary))
+      	ReturnToCapture()
+      END
+     type : 458752
+   -
+     name : Adds
+     internal_properties : CAAAAAgAAAA0DccrXHuXrv5PiOkhnsLMNKC76iiEsh8eDDWi98ooV+xmOJegzN6W+JewRRs5DRfUNZunSellnYNsXlEB3rht9feSXSRR+hl6Bt+xAKxYFw5pmlyOOrVCpiUp90QoF6O8wVDSgGZ8eF/uDQfUqLYe2pFtMZzdRS/rHixwcReVWr1p0S1ovBkZXdf95t3qot9jKVSRmlbboZ+h+Jbmz4lbDLbsMLKIVh7H4JjS0ynN4A40UDiUDDDPbZtKMF19RQ2msYiLehOBiW2++rfvrVAb8LYWWuLZKzL/BrA1SL2w0RZalIoE2A5H27x2u+VL3aeVUO6aYM8+FHKlS4ykBCSCV7DdGuQVqueQ/JT4Quzz3rI9lNX/lzCd2Zn411xxGJv7u94Fl7XkigemMvTFXNr1Hou2tZDg+Mc46CTQyJh6nj+ei+fjmd0c
+     procedure_id : 1510356637347491650
+     type_code : 12
+     code : |1+
+      // Summary: Adding an element into Outlook according to its type: email, contact, task..
+      // Syntax:
+      // Adds ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	None
+      
+      PROCEDURE Adds()
+      
+      WHEN EXCEPTION IN
+      	// Creates an item in Outlook
+      	:m_pautItem = :m_pautOutlook>>CreateItem(:m_nItemType)
+      	
+      	// Assigns the properties according to the type of item
+      	:AllocateProperties()
+      	
+      	// Backup
+      	:m_pautItem>>Save()
+      	
+      	delete :m_pautItem
+      	
+      	// Update the list of items in memory, by calling the method for updating the list to which the element belongs
+      	:m_clList:LoadItems()
+      	
+      DO
+      	Error(ExceptionInfo(errSummary))
+      	ReturnToCapture()
+      END
+     type : 458752
+   -
+     name : DeleteElement
+     internal_properties : CAAAAAgAAABWT4+C8xbfbtr5xOs0gbRpGvpIS534Hjn4U1K0AMY/+BH16pYXsbyalo1LZCb3RcJhjTD9w2fQkW1XRSrJnnXMdnOehglmi/a+WFINEvQ7aFTNpNQj/gjwxiS7EJI878QwxjvGBJOyrXyEjjXjd6PMsTiZGCTv/PzM2P8TsBVsNDQm+8Jnc8hqkiydlOrrmdUcr7CQdexBd6vfMoPBBBWoLb5r4yXGLjqYsJnSkze1R8Y=
+     procedure_id : 1510356637347557186
+     type_code : 12
+     code : |1-
+      // Summary: Delete an element from Outlook according to its identifier
+      // Syntax:
+      //DeleteElement (<sID>)
+      //
+      // Parameters:
+      //	sID: Identifier of the element in Outlook
+      // Return value:
+      // 	None
+      
+      PROCEDURE DeleteElement(sID)
+      
+      WHEN EXCEPTION IN
+      	
+      	:m_pautItem = :m_pautNameSpace>>GetItemFromID(sID)
+      	IF NOT :m_pautItem=Null THEN :m_pautItem>>delete()
+      	delete :m_pautItem
+      	
+      	// Update the list of items in memory, by calling the method for updating the list to which the element belongs
+      	:m_clList:LoadItems()
+      	
+      DO
+      	Error(ExceptionInfo(errSummary))
+      	ReturnToCapture()
+      END
+     type : 458752
+   -
+     name : AllocateProperties
+     procedure_id : 1510356637347622722
+     type_code : 12
+     code : |1+
+      PROCEDURE VIRTUAL AllocateProperties()
+      
+      // This method is redefined according to the type of data to write:
+      // Note, Email, Calendar, ...
+      
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : cEntité
+resources :
+ string_res :
+  identifier : 0x1a2e9b260caa2ded
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : CAAAAAgAAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ

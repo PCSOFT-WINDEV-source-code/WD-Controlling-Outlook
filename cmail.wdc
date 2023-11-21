@@ -1,0 +1,471 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : cMail
+ major_version : 28
+ minor_version : 0
+ type : 4
+ description : ""
+ subtype : 0
+class :
+ identifier : 0x3c0216a9685663c8
+ internal_properties : CAAAAAgAAAB2/vstTMCJbS/hlxjFxirSqKvCUuv8YxgpWyl7S3iA
+ code_elements :
+  internal_properties : CAAAAAgAAAAWZjcNIT7SnToLrCxDE+4Cj8o6JauNU5tQuRF/WDN7oJqRrrhyhOkzhByqETjReg+ni0MK9df6+28Yvg2pXDtTZ+1CcCcUb8Sf9msuKlsjPIaAy/JFtBNDYYNAr8r59dwxlsFWjy3G6csnZNwIy8fX2oneZqlcbbMoWSRb/oZZP3ha9Cw35SjZZ2vnncDTa9+QctznVxMlGlbPDaOqSQ2+f3YkOOjx
+  type_code : 10
+  p_codes :
+   -
+     code : |1-
+      // Class for emulating the "In-box" folder of Outlook
+      cMail is Class
+      	inhérits of cEntity					// Inherits from the generic class for emulating Outlook
+      	
+      	
+      	m_sID is string				//Identifier of the email
+      	m_sSubject is string				// Subject
+      	m_sContent is string			// Content of the message
+      	m_sReceiveDate is string 	// Reception date
+      	m_sReceptionTime is string  	// Incoming time
+      	m_sSender is string		// Sender
+      	m_sDest is string				// Recipient	
+      	m_sCCRecip is string			// Recipient		in copy
+      	m_sBCCRecip is string		// Recipient		in blind copy
+      	m_nNbATT is int				// Number of attachments
+      	m_parrATT is array dynamic	// Array containing the names of the files corresponding to the incoming attachments
+      	m_nNbATT2 is int
+      	m_parrATT2 is array dynamic	// 2nd array to manage the list of attachments to transmit during the responses/forwards
+      	m_sTempDir is string			// Directory used to store the attachments
+      	
+      END
+     type : 131072
+  procedures :
+   -
+     name : Constructor
+     internal_properties : CAAAAAgAAADD5xXwfNmdH7pA7IYEKVxFiRRPuW9W5q4tzcPZrtzshLRpnc/0JYIpv/IBdhomLNWMBLRd54xkB4pCYFRX/WQXak2BBKEz/x/Rok0W1PiBertXAKTPI/HCQaFj90ohcWS1XQXNoGuoRoFxdnbtkEMKCN1fE9T7Lsd79c0+GrmcDR/21gPe4JO400QRwTfzAFxW0g==
+     procedure_id : 4324043509246288840
+     type_code : 27
+     code : |1-
+      PROCEDURE Constructor( MyItem =Null, clList =Null)
+      
+      // Call to the constructor of the parent class
+      // to initialize the dialog with Outlook
+      Constructor cEntity(::CST_EMAIL, MyItem)
+      
+      IF clList <> Null THEN :m_clList =  clList
+     type : 589824
+   -
+     name : Destructor
+     procedure_id : 4324043508282909640
+     type_code : 28
+     code : |1-
+      PROCEDURE Destructor()
+      
+      // Delete the temporary files (attachments)
+      IF NOT :m_sTempDir~="" THEN fRemoveDir(:m_sTempDir,frRecursive)
+     type : 655360
+   -
+     name : AllocateProperties
+     internal_properties : CAAAAAgAAACGqSG9yMM8Y5K9bt+k+rPalojMC+kgPNDhmZkVj6FHGXwysMB1TkcqH9Gl85vT/t908sC8iSAxrs878/K36DnlAKrd+BBbL2sydKUdOLOHJK7d8i4MHD2LkLmfpwT7tDI4G1VRcxo8777JyBBTjuiulcN/R+cezgyWI7tsdurE7xt2iCRN05eDJXZCbG3Bjs/AF3wz2E84znxqrbwstnGC
+     procedure_id : 4324043520446984129
+     type_code : 12
+     code : |1+
+      // Summary: Assign the Outlook properties according to the values entered in WinDev
+      // Syntax:
+      // AllocateProperties ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	None
+      
+      PROCEDURE VIRTUAL AllocateProperties()
+      
+      WHEN EXCEPTION IN
+      	
+      	// Subject
+      	:m_pautItem>>Subject = :m_sSubject
+      	// Content
+      	:m_pautItem>>Body = :m_sContent
+      	// Recipients
+      	:m_pautItem>>To = :m_sDest
+      	:m_pautItem>>cc = :m_sCCRecip
+      	:m_pautItem>>bcc = :m_sCCRecip
+      	
+      	// Attachments
+      	i, j are int
+      	FOR i=1 _TO_ :m_nNbATT2
+      		// Is it an attachment that was received?
+      		FOR j=1 _TO_ :m_nNbATT
+      			// Yes = extract the attachment from the initial message
+      			IF :m_parrATT[j]=:m_parrATT2[i] THEN :sExtractAttch(:m_parrATT[j])		
+      		END
+      		// Attach the file to the message in Outlook
+      		:m_pautItem>>Attachments>>Add(:m_sTempDir+"\"+:m_parrATT2[i])	
+      	END
+      	
+      DO
+      	delete :m_pautItem
+      	Error(ExceptionInfo(errSummary))
+      	ReturnToCapture()
+      END
+      
+     type : 458752
+   -
+     name : AddAttachment
+     internal_properties : CAAAAAgAAABW43TX8JSeWTejzwDQq5B12rdOPwmsOWZmV2ZkdWUJ4NOgiAUZhU0ki16Zt01np2oT6GgKUPBIZ/5ljndtCqCB90EAV8hJUxflssR8kcYyu3H3WRq8+tAyC73EBZ85kDMlEZ5nbcrrQsF3sdq4Cl5JaLWeA0/Er7Or0+JEMa1zgOvCzV3RyRxeyShuA3GaNQMS
+     procedure_id : 4324043521365143529
+     type_code : 12
+     code : |1+
+      // Summary: Adds the requested attachment to the current message in the temporary array.
+      //(Effective addition in Outlook during the send operations)
+      // Syntax:
+      // AddAttachment (<sNameAT>)
+      //
+      // Parameters:
+      // 	sNameAT: Path of the attachment to add
+      // Return value:
+      // 	None
+      
+      PROCEDURE AddAttachment(sATName)
+      
+      // File name without path
+      sName is string = fExtractPath(sATName,fFileName+fExtension)
+      
+      // Copy into the directory of attachments
+      fCopyFile(sATName,:m_sTempDir+"\"+sName)
+      
+      // Element already found?
+      i is int
+      FOR i=1 _TO_ Dimension(:m_parrATT2)
+      	IF :m_parrATT2[i]~=sName THEN RETURN
+      END
+      // Refresh the initial table
+      Dimension(:m_parrATT2,Dimension(:m_parrATT2)+1)
+      :m_parrATT2[Dimension(:m_parrATT2)]=sName
+      :m_nNbATT2=Dimension(:m_parrATT2)
+      
+     type : 458752
+   -
+     name : Send
+     internal_properties : CAAAAAgAAADH5eW+noqz1SbCSPL+EwT1VUZ/AYFwpHQxz8eBRDLwgPwHRaeGDzjfa9TFalyYfOVgJrDB6WYqgfacNMA5DzATcsulCMv1FSk1/cKZgTtGTZCO7UckVg6Fekz42sfURq+ukPbcgVKhnTagL7U+f1i1kRDoml2yp3K0sAr5L5RFPNAhh+L3l1wPQPtyhFEH2nJS1g==
+     procedure_id : 4324043522063626227
+     type_code : 12
+     code : |1+
+      // Summary: Send an email
+      // Syntax:
+      // Send ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	None
+      
+      PROCEDURE Send()
+      
+      
+      WHEN EXCEPTION IN
+      	
+      	// Creates the item in Outlook
+      	:m_pautItem = :m_pautOutlook>>CreateItem(::olMailItem)
+      	
+      	// Assigns the properties of the message
+      	:AllocateProperties()
+      	
+      	// Check the addresses of the recipients
+      	IF NOT :m_pautItem>>Recipients>>ResolveAll() THEN
+      		// Display Outlook to solve the problem
+      		:m_pautItem>>Display()
+      	ELSE
+      		// Outgoing
+      		:m_pautItem>>Send()
+      	END
+      	
+      	delete :m_pautItem
+      	
+      DO
+      	delete :m_pautItem
+      	Error(ExceptionInfo(errSummary), "", <§$0000§>)
+      	RETURN
+      END
+     type : 458752
+   -
+     name : TemporaryDirectory
+     procedure_id : 4324043520677736455
+     type_code : 12
+     code : |1+
+      // Summary: Defines the working directory for the attachments
+      // Syntax:
+      // TemporaryDirectory (<sDir>)
+      //
+      // Parameters:
+      // 	sDir: working directory for the attachments
+      // Return value:
+      // 	None
+      
+      PROCEDURE TemporaryDirectory(sDir)
+      
+      fMakeDir(sDir)
+      :m_sTempDir=sDir
+      
+     type : 458752
+   -
+     name : sExtractAttch
+     internal_properties : CAAAAAgAAABAU2NvLpXhk1SHoFEeeEecRpg0m0fyfkwjh9cz9eMTw1DuYHBjvF0eEesrARFFookEIrTgK7rzZmHRvbxxRp2/5MahnAahZfOIfq+blr1XQjFoH7mnTeoYa8QkyunmR03TPnJM9pcRzEFEJeP0TWNh7KpYfq6/ByEZ/niP1+nHipLtcTMsFLxAnL2rr6r80drzQgG2W8RZ63coCxJ6eDfE
+     procedure_id : 4324043520684486663
+     type_code : 12
+     code : |1+
+      // Summary: Extracting an attachment from the current message
+      // Syntax:
+      // [ <Result> = ] sExtractAttch (<sNameAT> [, <sTempDir>])
+      //
+      // Parameters:
+      // 	sNameAT: Name of the attachment
+      // 	sTempDir: Temporary directory
+      // Return value:
+      // 	string: Name of the generated temporary file (empty string if error)
+      
+      FUNCTION sExtractAttch(sATName,sTempDir="")
+      
+      WHEN EXCEPTION IN
+      	IF  sTempDir~="" THEN sTempDir=:m_sTempDir
+      	
+      	// Reposition on the corresponding Outlook object
+      	objItem is object OLE dynamic = :m_pautNameSpace>>GetItemFromID(:m_sID)
+      	IF objItem=Null THEN
+      		Error(<§$0001§>)
+      		delete objItem	
+      		RESULT ""
+      	END
+      	
+      	// Find the requested attachment
+      	i is int
+      	s is string
+      	FOR i = 1 _TO_ objItem>>Attachments>>count
+      		s = objItem>>Attachments(i)>>FileName
+      		IF s ~= sATName THEN
+      			// Extraction into the current directory
+      			s=sTempDir+"\"+objItem>>Attachments(i)>>FileName
+      			objItem>>Attachments(i)>>SaveAsFile(s)
+      			delete objItem
+      			RESULT s
+      		END
+      	END
+      	
+      	delete objItem
+      	RESULT ""
+      	
+      DO
+      	Error(ExceptionInfo(errSummary))
+      	ReturnToCapture()
+      END
+      
+      RESULT ""
+     type : 458752
+   -
+     name : DeleteAttachment
+     internal_properties : CAAAAAgAAAC8WRrMHiAQ2Q3L+2D6+8gzMD0aSasEV7JEt/oE16XpRjkieId3EfdcwQ4188vTuzSZLuxwGshuX4DxPuvr1txbNSeQYXLZccvO7fcXFM2NDCouENEzYyuZqByjlB6AyxjSRLlqaEdeuV6GgJlvwTmeoQx1ynZtUlIIWjlTIFD2xRjV2EAkTnu5EuuhVkywH2n4
+     procedure_id : 4324043520461467665
+     type_code : 12
+     code : |1+
+      // Summary: Deletes the requested attachment from the current message in the temporary array.
+      // (Effective addition in Outlook during the send operations)
+      // Syntax:
+      // DeleteAttachment (<sNameAT>)
+      //
+      // Parameters:
+      // 	sNameAT: Attachment to delete
+      // Return value:
+      // 	None
+      
+      PROCEDURE DeleteAttachment(sATName)
+      
+      i is int
+      
+      // Temporary work table
+      m_parrATT3 is array dynamic of 0 strings
+      
+      FOR i=1 _TO_ Dimension(:m_parrATT2)
+      	IF NOT :m_parrATT2[i]~=sATName THEN
+      		// Adds the element to the array
+      		Dimension(m_parrATT3,Dimension(m_parrATT3)+1)
+      		m_parrATT3[Dimension(m_parrATT3)]=:m_parrATT2[i]
+      	END
+      END
+      // Recreates the initial array
+      IF NOT :m_parrATT2=Null THEN delete :m_parrATT2
+      :m_parrATT2 = new array of Dimension(m_parrATT3) strings
+      FOR i=1 _TO_ Dimension(m_parrATT3)
+      	:m_parrATT2[i]=m_parrATT3[i]
+      END
+      :m_nNbATT2=Dimension(:m_parrATT2)
+      
+     type : 458752
+   -
+     name : InitialiseATTCH
+     procedure_id : 4324842895519851648
+     type_code : 12
+     code : |1+
+      // Summary: Procedure called before entering a new message to reinitialize the management of attachments
+      // Syntax:
+      // InitialiseATTCH ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	None
+      PROCEDURE InitialiseATTCH()
+      
+      // Reset the arrays to manage the attachments
+      
+      IF NOT :m_parrATT=Null THEN delete :m_parrATT
+      :m_parrATT = new array of :m_nNbATT strings
+      IF NOT :m_parrATT2=Null THEN delete :m_parrATT2
+      :m_parrATT2 = new array of :m_nNbATT2 strings
+      Dimension(:m_parrATT,0) ; :m_nNbATT=0
+      Dimension(:m_parrATT2,0) ; :m_nNbATT2=0
+     type : 458752
+   -
+     name : AllocateEmails
+     internal_properties : CAAAAAgAAAAs6YpcNvBsyZXLE+gqE+jbwAVisStsN9r0f7oUDyXhRiEiyAcfQY+8aZ6964v72yz51tRImgAed3D5DluDtjQLzfeQASq5WVtCCWuLkPnBCGYiDNU3By+VrCh3aDocb3ReqCX+HKsiFfLiVH0brf2qnQBh3roRNq5cVj1XPDw6wUT59KTY4h/FdqdJ3rwgr/lo
+     procedure_id : 4331878632033260488
+     type_code : 12
+     code : |1-
+      // Summary: Retrieving the emails addresses of the recipients for the answer
+      // Syntax:
+      // AllocateEmails ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	None
+      
+      PROCEDURE AllocateEmails()
+      
+      WHEN EXCEPTION IN
+      	// 'Reply to' (email)
+      	objReply is object OLE dynamic = :m_pautItem>>Reply
+      	IF NOT objReply=Null THEN
+      		:m_sSender = objReply>>Recipients(1)>>Address
+      		delete objReply
+      	END
+      	
+      	// Recipients (email) for 'Reply to All'
+      	objReplyAll is object OLE dynamic = :m_pautItem>>ReplyAll
+      	sCurrentRecip, sRecipName, sRecipEmail are strings
+      	sCurrentRecip = Replace(:m_pautItem>>to,"'","")
+      	k is int
+      	FOR k=1 _TO_ objReplyAll>>Recipients>>Count
+      		sRecipEmail=objReplyAll>>Recipients(k)>>Address
+      		sRecipName=objReplyAll>>Recipients(k)>>Name
+      		IF NOT sRecipName~=:m_sUser THEN	// Ignores the current user
+      			IF NOT sRecipEmail~=sCurrentRecip THEN	// Ignores the email of the current user
+      				IF NOT sRecipEmail~=:m_sSender THEN		// Ignores the sender
+      					IF NOT :m_sDest~="" THEN :m_sDest+="; "
+      					:m_sDest+=sRecipEmail
+      				END
+      			END
+      		END
+      	END
+      	delete objReplyAll
+      	
+      	// Cc/Bcc
+      	:m_sCCRecip = :m_pautItem>>cc
+      	:m_sBCCRecip = :m_pautItem>>bcc
+      	
+      DO
+      	RETURN
+      END
+     type : 458752
+   -
+     name : AssignDateTime
+     procedure_id : 4331881780865122671
+     type_code : 12
+     code : |1+
+      PROCEDURE AssignDateTime()
+      
+      WHEN EXCEPTION IN
+      	// Reception date
+      	sDateTime is datetime
+      	sDateTime = :m_pautItem>>ReceivedTime
+      	:m_sReceiveDate = sDateTime..Date
+      	IF NOT DateValid(:m_sReceiveDate) THEN :m_sReceiveDate=""
+      	// Incoming time
+      	:m_sReceptionTime = NumToString(sDateTime..Hour,"02d")+NumToString(sDateTime..Minute,"02d")
+      DO
+      	RETURN
+      END
+     type : 458752
+   -
+     name : FillEmail
+     internal_properties : CAAAAAgAAACENyeBUsxq/20mePae5lCIuaAsvI19d5hioRbdCB3nN8wnsrhOOFrc9NGt5clJKckyvO0MOCyZFVYMrRRvdC/D4eEZsttiQFg8zbtEztZcVGPj3YaIFuTu8/OKbxE3qnX3wb5B3zixKOUpI17UZGwn1Bv0QU3G1VENleQmYx5yfoRQvZCVTb4AYII71k2wnG4PQtw4EVDJ54uzjD7cWUXBcA==
+     procedure_id : 1886562799929629172
+     type_code : 12
+     code : |1-
+      // Summary: Retrieving the properties of the email that was read previously
+      // Syntax:
+      //FillEmail (<clList>)
+      //
+      // Parameters:
+      // 	clList: List to which the element belongs
+      // Return value:
+      // 	None
+      
+      PROCEDURE VIRTUAL FillEmail(clList)
+      
+      // Automatic identifier managed by Outlook
+      :m_sID = :m_pautItem>>EntryID
+      // Subject
+      :m_sSubject = :m_pautItem>>Subject
+      // Content
+      :m_sContent = :m_pautItem>>Body
+      // Retrieve the date and time
+      :AssignDateTime()
+      // Retrieve the email addresses of the recipients to answer
+      :AllocateEmails()
+      // Attachments
+      :m_nNbATT = :m_pautItem>>Attachments>>count
+      n is int =  :m_nNbATT 
+      :m_parrATT = new array of n strings
+      j is int
+      FOR j=1 _TO_ :m_nNbATT
+      	:m_parrATT[j] = :m_pautItem>>Attachments(j)>>FileName
+      END
+      
+      :m_clList = clList
+     type : 458752
+   -
+     name : FreeDynTab
+     procedure_id : 1886566248788515609
+     type_code : 12
+     code : |1+
+      PROCEDURE VIRTUAL FreeDynTab()
+      
+      // Attachments for all the messages
+      
+      IF NOT :m_parrATT=Null THEN
+      	delete :m_parrATT
+      END
+      // Attachments for the current message
+      IF NOT :m_parrATT=Null THEN delete :m_parrATT
+      IF NOT :m_parrATT2=Null THEN delete :m_parrATT2
+      
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+resources :
+ string_res :
+  identifier : 0x3c1def8e2c2cdf7a
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+  strings :
+   -
+     text :
+      en-GB : Check the addresses of the email recipients.
+     index : 0
+   -
+     text :
+      en-GB : This message does not exist anymore in Outlook.
+     index : 1
+custom_note :
+ internal_properties : CAAAAAgAAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ

@@ -1,0 +1,140 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : cOutlook
+ major_version : 28
+ minor_version : 0
+ type : 4
+ description : ""
+ subtype : 0
+class :
+ identifier : 0x3c0216a930206314
+ internal_properties : CAAAAAgAAAB2/vstTMCJbS/hlxjFxirSqKvCUuv8YxgpWyl7S3iA
+ code_elements :
+  internal_properties : CAAAAAgAAAAYuIcTRqRfQgMcF941T2UxT+7dsHmmkeLxlyC/DkcPNMk7rhSHPZ1WWUVwfor2ZXBUEYVzOpaCsJqg6rZBBwkfJCEU2D2cPHjqZaCjpbgRo5y992XcI+4kIyzTPU7Rd3GOKQjYSGvsCxQsph/2qPy8gKmvlUphVxXpECe5lpTKvxMiNJ69zQ8iP100hl5GjemcZ+nr6u9P4d+OA5PXPMxKcPH3S1b/0ipycJD8d8vb+hX+JlcHS6G1c7405V3/JzWw1H/D5fyrH0luA176VhNWhZxQQiLjddH5H3htw0nj2oL/qFy0xEkBPqVVatSxaF9TJSfAXTxKx2eWbYIrbpqnQ5mUlio0ub6GY1jnmflQpVpxDopt5ywEdq7wljSwZwxpWyzsS/YhitLafVZhZDSlO+hgWB5Ohd5bDbCTT4Zim0rXURgU1/P1CgK2ElcRxl1TCyNPOebBTRGbcS7FamqW/+djxbaDUuadaMKIjp3hQ07LXYqkCR5ydLx6U71ijiqJGP1w0QLTjyCW9SLnG5PPveTCoU70jLF/6ZPgt2qg6yO3NTwwRN+NDl7Hc1iadMCr66Fe3OnUxp7XZzLd/LgcgkAUiNgIlWn/mavfs8qyDm0qwNs8YN1j8Pb31t83tYAWMuaQq7ooOVEeorenFQED+6Yd1U+fczlCNS7+XgkN3r/q3MRwGWj27L7CNls56butcYQKBi9bnLr4fj7G3DtnuCyvWZm2q4woNoxIFGz7gJO8CIpLuH6YI58tnAxdIyF1Z4dTEIJgdVoaXL43EvUhU7oSTLLbbQKiscv3+WRHi09XADPYSw/LVehkZoFGSd17x3Ev+CvyxIs5+e3/F49fgrfvj+RZQLbdST07XHmmLwPaHQFU/1VmyZ9H6DhPxk7E5fWZeg7JPLsy/SxLhvjeHRsnYxJOwPInc8Tf
+  type_code : 10
+  p_codes :
+   -
+     code : |1-
+      // Class for emulating Outlook .. class from which all the other ones inherit from .. this class manages the emulating at its highest level
+      cOutlook is Class
+      	
+      	m_pautItem is object OLE dynamic		// Item object
+      	m_pautOutlook is object OLE dynamic	// "Outlook.Application" object
+      	m_pautNameSpace is object OLE dynamic	// NameSpace object, "MAPI"
+      	m_sUser is string				// Name of the user
+      	m_nItemType is int					// Type of item used: Calendar, Note, Task, ...
+      	
+      	CONSTANT
+      		CST_INBOX = "INBOX"
+      		CST_EMAIL = "EMAIL"
+      		CST_CALENDAR = "CALENDAR"
+      		CST_CONTACTS = "CONTACTS"
+      		CST_TASKS = "TASKS"
+      		CST_NOTES = "NOTES"
+      		
+      		// Types of corresponding elements
+      		olMailItem			=0	// Email
+      		olAppointmentItem	=1	// Calendar
+      		olContactItem 		=2	// Contact
+      		olTaskItem			=3	// Task
+      		olNoteItem			=5	// Note
+      	END
+      	
+      END
+     type : 131072
+  procedures :
+   -
+     name : Constructor
+     internal_properties : CAAAAAgAAADWNVOWtIK1XiB1jON6sWj1LhDg3R3V01/qkCLRbCYqiXUneM76bXB2EmGvZCrHIQrVDfBFn5c0nXlzqSLV3jkk6pM+Tq1W59KSrN7N3sy3SDitTMSXfvx8BOb1SiQCkWZW4G043qngs1KOWBedrZV+P6Jzws7VqoJSUmHFYkOWDvLArZTRGcZomFZPypHEoG4/uQ8Jct5TJk64UmqOFYobjhdMhE7dB2eXdYbfwRnrx0Y=
+     procedure_id : 4324043508088333086
+     type_code : 27
+     code : |1-
+      PROCEDURE Constructor(sFolder, MyItem = Null)
+      
+      WHEN EXCEPTION IN
+      	
+      	// Initialize the dialog with Outlook
+      	:m_pautOutlook=GetActiveObject("Outlook.Application")
+      	IF :m_pautOutlook=Null THEN :m_pautOutlook=new object OLE "Outlook.Application"
+      	IF :m_pautOutlook=Null THEN
+      		Error(<§$0000§>,<§$0001§>)
+      		EndProgram()
+      	END
+      	:m_pautNameSpace=:m_pautOutlook>>GetNameSpace("MAPI")
+      	IF :m_pautNameSpace=Null THEN
+      		Error(<§$0002§>)
+      		EndProgram()
+      	END	
+      	
+      	:m_sUser=:m_pautNameSpace>>Logon("","",True,True)
+      	
+      	IF MyItem <> Null THEN :m_pautItem = MyItem
+      	
+      	// Positions on the requested Outlook folder
+      	SWITCH Upper(NoSpace(Replace(Replace(Replace(sFolder,"â","a"),"î","i"),"é","e")))
+      		CASE ::CST_INBOX, ::CST_EMAIL :
+      			:m_nItemType=::olMailItem
+      			
+      		CASE ::CST_CALENDAR : 
+      			:m_nItemType=::olAppointmentItem
+      			
+      		CASE ::CST_CONTACTS : 
+      			:m_nItemType=::olContactItem
+      			
+      		CASE ::CST_TASKS : 
+      			:m_nItemType=::olTaskItem
+      			
+      		CASE ::CST_NOTES : 
+      			:m_nItemType=::olNoteItem
+      			
+      		OTHER CASE
+      			Error(StringBuild(<§$0004§>,sFolder))
+      			RETURN
+      	END
+      DO
+      	Error(ExceptionInfo(errSummary))
+      	EndProgram()
+      END
+     type : 589824
+   -
+     name : Destructor
+     procedure_id : 4324043507472032542
+     type_code : 28
+     code : |1-
+      PROCEDURE Destructor()
+      
+      IF NOT :m_pautNameSpace=Null THEN delete :m_pautNameSpace
+      IF NOT :m_pautOutlook=Null THEN delete :m_pautOutlook
+     type : 655360
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+resources :
+ string_res :
+  identifier : 0x3c0216a925916314
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+  strings :
+   -
+     text :
+      en-GB : The access to Outlook by OLE failed.
+     index : 0
+   -
+     text :
+      en-GB : "Check the entire Outlook version (not 'Outlook Express'), supplied with the Office pack, is properly installed."
+     index : 1
+   -
+     text :
+      en-GB : Error while connecting to the MAPI 'NameSpace'.
+     index : 2
+   -
+     text :
+      en-GB : Unknown file <%1>
+     index : 3
+   -
+     text :
+      en-GB : Unknown file <%1>
+     index : 4
+custom_note :
+ internal_properties : CAAAAAgAAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ

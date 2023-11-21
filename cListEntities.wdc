@@ -1,0 +1,240 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : cListEntities
+ major_version : 28
+ minor_version : 0
+ type : 4
+ description : ""
+ subtype : 0
+class :
+ identifier : 0x14f5dd5905152469
+ internal_properties : CAAAAAgAAAB2/vstTMCJbS/hlxjFxirSqKvCUuv8YxgpWyl7S3iA
+ code_elements :
+  internal_properties : CAAAAAgAAABm4PVFe9JAHaoZ7pWrapr167xJBrSdz0axAnnnfYhOQaaZf6aFmw+87+hdnze0968KI3y7g0wMbri74fT3L3UE/39pGg==
+  type_code : 10
+  p_codes :
+   -
+     internal_properties : CAAAAAgAAACYsXzIb0KoQ3e4RzgJJjwrwHbhnRdOAxq6krjNKXowxapQV4ImugvBf4HpHzZYbsOJukDLwHt4bvgl90sfXiDDzrwUdYUde9t6EknrMAFGLZNXvYb1Ad1S2AqhKjwdPgHZ0qbC5SFT+Ng4ydLeHh5zoLdYGUgHv9/iKOvHjLwnmcbBHud0nBdMp8DoQ5q6D03c
+     code : |1+
+      cListEntities is Class
+      	inhérits of cOutlook
+      	
+      	m_pautFolder is object OLE dynamic		// Folder object, Outlook folder
+      	m_parrRubriques is array dynamic 		// Array used to store the elements read in Outlook
+      	m_nNumCurrentItem is int				// Number of the current item
+      	m_bOutside is boolean					// True if no item to read
+      	
+      	
+      	CONSTANT
+      		// Outlook folders
+      		olFolderInbox=6			// Inbox
+      		olFolderCalendar=9		// Calendar
+      		olFolderContacts=10     // Contacts
+      		olFolderTasks=13		// Tasks
+      		olFolderNotes=12 		// Notes
+      		
+      		
+      		CST_ANSWER = "ANSWER"
+      		CST_ANSWER_TO_ALL = "ANSWERTOALL"
+      		CST_FORWARD = "FORWARD"
+      	END
+      	
+      END
+      
+     type : 131072
+  procedures :
+   -
+     name : Constructor
+     internal_properties : CAAAAAgAAADS+2bDEEgtxttszXSGRiFewaAubpGqOObLxlN0macQnoDKzgZtkHtBltcY/9BfCWuFskJuvKItIDydvKig8jQYM17bOZZYWjrFsjJ/M1g5/zaktn3SdCNUIx4Oz8ic8KktELJRncOPXF0+FHiDLMfW9deyEuc9AIMpJKaF+pZe8j83LPFJBylw8lku8OYmaiVKdKkxez7tU8dIMus21Jzaq25fKA==
+     procedure_id : 1510356624459834473
+     type_code : 27
+     code : |1-
+      PROCEDURE Constructor(sFolder)
+      
+      // Call to the constructor of the parent class
+      // to initialize the dialog with Outlook
+      Constructor cOutlook(sFolder)
+      
+      // Positions on the requested Outlook folder
+      nIDFolder is int
+      SWITCH Upper(NoSpace(Replace(Replace(Replace(sFolder,"â","a"),"î","i"),"é","e")))
+      	CASE ::CST_INBOX, ::CST_EMAIL :
+      		nIDFolder=::olFolderInbox
+      		:m_nItemType=::olMailItem
+      		
+      	CASE ::CST_CALENDAR : 
+      		nIDFolder=::olFolderCalendar
+      		:m_nItemType=::olAppointmentItem
+      		
+      	CASE ::CST_CONTACTS : 
+      		nIDFolder=::olFolderContacts
+      		:m_nItemType=::olContactItem
+      		
+      	CASE ::CST_TASKS : 
+      		nIDFolder=::olFolderTasks
+      		:m_nItemType=::olTaskItem
+      		
+      	CASE ::CST_NOTES : 
+      		nIDFolder=::olFolderNotes
+      		:m_nItemType=::olNoteItem
+      		
+      	OTHER CASE
+      		Error(StringBuild(<§$0000§>,sFolder))
+      		RETURN
+      END
+      
+      :m_pautFolder = :m_pautNameSpace>>GetDefaultFolder(nIDFolder)
+     type : 589824
+   -
+     name : Destructor
+     internal_properties : CAAAAAgAAABmCQs4vAj1MjfgcTg6mtUiZbwpx4HUfJZr5hM0XefE6hhSEh7lALcBlicgtzT3/a+NSi6WdGp5sNR1XChcCihs+653Qe7IFtJtwlpPv5CFczY0oF8w1o3+WZCoUZb2qoeLxowTE6VRnjMAPhLx3pEcoy0c3BVfMq23vrhXUGAIGM1VNtNXMWsysJPICqQQEuVLeOW1J8pxF9uchl/iXOgWaNjrnA==
+     procedure_id : 1510356624459900009
+     type_code : 28
+     code : |1-
+      PROCEDURE Destructor()
+      
+      // Free the memory occupied by the elements read in Outlook
+      IF NOT :m_parrRubriques=Null THEN delete :m_parrRubriques
+      
+      // End of dialog with Outlook
+      IF NOT :m_pautItem=Null THEN delete :m_pautItem
+      IF NOT :m_pautFolder=Null THEN delete :m_pautFolder
+     type : 655360
+   -
+     name : AssignItemArray
+     procedure_id : 1510356624459965545
+     type_code : 12
+     code : |1+
+      PROCEDURE VIRTUAL AssignItemArray(i <useful>)
+      
+      // This method is redefined according to the type of data read:
+      // Note, Email, Calendar, ...
+      
+     type : 458752
+   -
+     name : LoadItems
+     internal_properties : CAAAAAgAAABqicFT6dKoWRJ9LthtSCdUCdp6N5dsp9pqa4yvjIgGJiDnl77iVibC+rAm5ga1fzyr5uHCFgHpgDPkOuVOpUClIGPKnswN/cxIrR+ufI+Kb1A49o6y8ezWEpLFtJIjY6sYOMEhFe9D/DjuDDkLBBWTVV4rlz3L11fw1pEZojSjMrdbXGRTIqKsgz9sRdeF48D8hnLJ5GrHowieS70hW5E=
+     procedure_id : 1510356624460031081
+     type_code : 12
+     code : |1+
+      // Summary: Loads the Outlook data in a dynamic array
+      // Syntax:
+      // LoadItems ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	None
+      
+      PROCEDURE LoadItems()
+      
+      WHEN EXCEPTION IN
+      	// Case of emails for which some dynamic arrays are allocated
+      	// to store the attachments (method not defined in the other cases)
+      	:FreeDynTab()
+      	
+      	Dimension(:m_parrRubriques, :m_pautFolder>>items>>count)
+      	
+      	// Browse the items and call the assignment method
+      	// (specific to the type of element read)
+      	i is int
+      	FOR i=1 _TO_ :m_pautFolder>>items>>count
+      		:m_pautItem = :m_pautFolder>>Items>>Item(i)
+      		:AssignItemArray(i)
+      	END
+      	IF NOT :m_pautItem=Null THEN delete :m_pautItem
+      	
+      	// Initialize the browse variables
+      	:m_nNumCurrentItem=0
+      	:m_bOutside=True
+      	
+      DO
+      	Error(ExceptionInfo(errSummary))
+      	ReturnToCapture()
+      END
+      
+     type : 458752
+   -
+     name : FreeDynTab
+     internal_properties : CAAAAAgAAADVy/s7bh/jHQbuyCKSN+j51dLXkXXEyKQRG3dZMM48rDQ7TZeSIwynq/CtklgU0CFYGvhxTQK2Ub5QZEA9o4RHUtfl6N/JUUE9sxQXq+EY63LE982uBECLlEqiuDki8I1A/kgaW/CTU/AOqTMQjUJTA4ZSkG+oEeC+jnRf2aqnomqvuaAxFQ51koH07m58bIBAxA==
+     procedure_id : 1510356624460096617
+     type_code : 12
+     code : |1+
+      PROCEDURE VIRTUAL FreeDynTab()
+      
+      // Case of emails for which some dynamic arrays are allocated
+      // to store the attachments (method not defined in the other cases)
+      
+      
+     type : 458752
+   -
+     name : ReturnCurrentItem
+     procedure_id : 1510356624460162153
+     type_code : 12
+     code : |1+
+      // Summary: Returns the element (email, contact, task) found at the current subscript
+      // Syntax:
+      //[ <Result> = ] ReturnCurrentItem ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	Undefined type: 
+      
+      PROCEDURE ReturnCurrentItem()
+      
+      RESULT :m_parrRubriques[:m_nNumCurrentItem]
+     type : 458752
+   -
+     name : ReadSearch
+     internal_properties : CAAAAAgAAABouuwGQ5wDvsRrGIKm0EpfjgA/dIXDhWLvEErBTWGU2CYNi5qcN4MRfZ27OrMaiFrn9FqlYdZF1fgIZ4j3rBw+/QGP3bJ7DK8bbn01XfBAQqLKqbuYtz2J+OlmyyiTkIp5hY3Bi3RhzWZ9ulZnpV0N53jVkkXW2Kr0fd6DgPk+mjCBkFqUh4a06gvTYytIuXVVGdj1TQ==
+     procedure_id : 1510356624460227689
+     type_code : 12
+     code : |1-
+      // Summary: Positioning on an item according to its ID
+      // Syntax:
+      //[ <Result> = ] ReadSeek (<sID>)
+      //
+      // Parameters:
+      // 	sID: <specify the role of sID>
+      // Return value:
+      // 	boolean: 
+      
+      FUNCTION ReadSearch(sID)
+      
+      // Load the data from Outlook
+      IF Dimension(:m_parrRubriques)=0 THEN :LoadItems()
+      
+      // Find the element 
+      nElementFound is int
+      
+      nElementFound = ArraySeek(:m_parrRubriques, asLinear, "m_sID", sID)
+      
+      IF nElementFound = -1 THEN
+      	// No element to read
+      	:m_bOutside=True
+      	:m_nNumCurrentItem=0
+      ELSE
+      	:m_bOutside=False
+      	:m_nNumCurrentItem=nElementFound
+      END
+      
+      RESULT (nElementFound>0)
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : cListeEntités
+resources :
+ string_res :
+  identifier : 0x1a2e7ffe05b61a4c
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+  strings :
+   -
+     text :
+      en-GB : Unknown file <%1>
+     index : 0
+custom_note :
+ internal_properties : CAAAAAgAAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ

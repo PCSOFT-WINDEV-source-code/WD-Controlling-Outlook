@@ -1,0 +1,99 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : cListMails
+ major_version : 28
+ minor_version : 0
+ type : 4
+ description : ""
+ subtype : 0
+class :
+ identifier : 0x14f5dd5705001ebe
+ internal_properties : CAAAAAgAAAB2/vstTMCJbS/hlxjFxirSqKvCUuv8YxgpWyl7S3iA
+ code_elements :
+  internal_properties : CAAAAAgAAAADZD6XckDmkRCRLu2nsOng/fVh93rdkfyLWloBGk2BRem4TF+3frCDA0qCQY+16IpNuui8Z5VZ0e4XMOoXksBndypna7Tf
+  type_code : 10
+  p_codes :
+   -
+     code : |1-
+      cListMails is Class
+      	inhérits of cListEntities
+      	
+      END
+     type : 131072
+  procedures :
+   -
+     name : Constructor
+     internal_properties : CAAAAAgAAADC63Y8kFgZ+n0OAQr41M/UV0JIosmi1IJxPMeuY8mSqN4c1C5RtNvlFB104S7Jt+FvmKTq7PLttMYvFH4ybIYSPfRJieKUOmqTEHq1/eLjSbwu0ZSj25bRLBuhVl3/cTjAy4EM0hbeLfKf37fAtzxJxN6xtWywf0BKIT0oA52jRRbuS+RmUngB05ZtU+9lRyDB0wRoPO2Y/Ny9Bfprlz2pm15POA==
+     procedure_id : 1510356615868522174
+     type_code : 27
+     code : |1-
+      PROCEDURE Constructor()
+      
+      // Call to the constructor of the parent class
+      // to initialize the dialog with Outlook
+      Constructor cListEntities(::CST_INBOX)
+      
+      //List of Outlook emails
+      :m_parrRubriques=new array of 0 cMail
+     type : 589824
+   -
+     name : Destructor
+     procedure_id : 1510356615868587710
+     type_code : 28
+     code : |1-
+      PROCEDURE Destructor()
+      
+      // Free the dynamic arrays
+      //:FreeDynTab()
+     type : 655360
+   -
+     name : AssignItemArray
+     internal_properties : CAAAAAgAAAAg561Y2dTZZBQPnvk2h6oVtoAuldf5Jj+cHewmEDBBw9fvS1CVAaY2UD13MNC7kTAzJxzLqX+K2Uf/ge6LspFyCOGi0LOqgT685OLZDOBPZloLmGbRFnosnTkYjXfZUF+Lszjr4Q578rMh6+pYYGgjNEW+ddkiCWUHIUg8uZrBj7cD2OdM9jVbjV1OreOkgYFcMsOPdA1A8tCifb+FJI3Ez9Jn4yXWStZorIWCR2Mh+Rg=
+     procedure_id : 1510356615868653246
+     type_code : 12
+     code : |1+
+      // Summary: Stores in memory (in an array) the list of Outlook emails
+      // Syntax:
+      //AssignItemArray (<i>)
+      //
+      // Parameters:
+      // 	i: Subscript in the array of the email that must be added
+      // Return value:
+      // 	None
+      
+      PROCEDURE VIRTUAL AssignItemArray(i)
+      
+      //Create a new Email instance
+      clCurrentEmail is cMail(:m_pautItem) 
+      
+      //Assign its members with the information read in Outlook
+      clCurrentEmail.FillEmail(object)
+      
+      //Add the email in the array at the specified subscript
+      :m_parrRubriques[i] = clCurrentEmail
+     type : 458752
+   -
+     name : FreeDynTab
+     procedure_id : 1510356615868718782
+     type_code : 12
+     code : |1+
+      PROCEDURE VIRTUAL FreeDynTab()
+      
+      // Attachments for all the messages
+      i is int
+      FOR i = 1 _TO_ Dimension(:m_parrRubriques)
+      	:m_parrRubriques[i]:FreeDynTab()
+      END
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : cListeMails
+resources :
+ string_res :
+  identifier : 0x1a2e67440bd38490
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : CAAAAAgAAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ

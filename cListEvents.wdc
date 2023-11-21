@@ -1,0 +1,88 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : cListEvents
+ major_version : 28
+ minor_version : 0
+ type : 4
+ description : ""
+ subtype : 0
+class :
+ identifier : 0x14f5dd5a05292987
+ internal_properties : CAAAAAgAAAB2/vstTMCJbS/hlxjFxirSqKvCUuv8YxgpWyl7S3iA
+ code_elements :
+  internal_properties : CAAAAAgAAABm4PVFe9JAHaoZ7pWrapr167xJBrSdz0axAnnnfYhOQaaZf6aFmw+87+hdnze0968KI3y7g0wMbri74fT3L3UE/39pGg==
+  type_code : 10
+  p_codes :
+   -
+     code : |1+
+      cListEvents is Class
+      	inhérits of cListEntities
+      	
+      END
+      
+     type : 131072
+  procedures :
+   -
+     name : Constructor
+     internal_properties : CAAAAAgAAACCKzZ8gLh5mn3OYSp4lO+Ud2KoQqkCdOIx/GdOo8nyaP489I4xVPvF1F0UwW7Jl6GPOAQKTNKNlAZvdB7yrKaS3RRp6QL0moqTUBrVfWJDCZwOAYQTK+Zh3CuRRq3PweiQ+7F8wmYu/SIvD2cQh8w51M7hpVwAz9D6ce0YE62zdaZeOxQW4ghRg6bdA7+115DRw7TYrP2ozAxNtWr7J03pW54P+A==
+     procedure_id : 1510356628756113799
+     type_code : 27
+     code : |1-
+      PROCEDURE Constructor()
+      
+      // Call to the constructor of the parent class
+      // to initialize the dialog with Outlook
+      Constructor cListEntities(::CST_CALENDAR)
+      
+      //List of Outlook events
+      :m_parrRubriques = new array of 0 cEvent
+     type : 589824
+   -
+     name : Destructor
+     procedure_id : 1510356628756179335
+     type_code : 28
+     code : |1+
+      PROCEDURE Destructor()
+      
+     type : 655360
+   -
+     name : AssignItemArray
+     internal_properties : CAAAAAgAAADljp0nwJxJJtGIo4j6Op1WL3fAEkdOrNHtmhR94AQtZhhExaAQXKhxIth1oyZbrW8BVtS3r9PGwYfjh0gtEluMHFCvm/rnEgmQ4ewgFxd0esqb6SO7PAwrtkyglpY8wyl6pSQReA6xGh6CJA53vRGlY8Fs8wAGn3naULfelmNaAUBDIlODUBnpyEIz1Wr3YPsVQgn/zdmucNXdqOzFROmV8WWk1IPpzcGmWFouR9WpxBO7yDqVxNkYCQ55et4=
+     procedure_id : 1510356628756244871
+     type_code : 12
+     code : |1+
+      // Summary: Stores in memory (in an array) the list of Outlook events
+      // Syntax:
+      // AssignItemArray (<i>)
+      //
+      // Parameters:
+      // 	i: Subscript in the array of the event that must be added
+      // Return value:
+      // 	None
+      
+      PROCEDURE VIRTUAL AssignItemArray(i)
+      
+      //Create a new Event instance
+      clCurrentEvent  is cEvent(:m_pautItem) 
+      
+      //Assign its members with the information read in Outlook
+      clCurrentEvent.FillEvent(object)
+      
+      //Add the event into the array at the specified subscript
+      :m_parrRubriques[i] = clCurrentEvent
+      
+      
+      
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : cListeEvènements
+resources :
+ string_res :
+  identifier : 0x1a2e8d580a454015
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : CAAAAAgAAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ

@@ -1,0 +1,298 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : WIN_EmailAT
+ major_version : 28
+ minor_version : 0
+ type : 2
+ description : ""
+ subtype : 0
+window :
+ name : WIN_EmailAT
+ identifier : 0x24f5dd501155ffba
+ internal_properties : CAAAAAgAAACPeJKA8qQ1w7tUIG3+v43PMtea9sF+r7pxvrJfRfpsmjbtVD6ZOjS7EdYl0Q96Wvj9dOVP+wKmtKEekyUQdZ6kwko7rVjzNmS3joEJgHdhmeFdsw63fAeTOwg+ycl/WDBVQArNiLGSYUi2w8XYzMnZ7aGolDGT+sH/hsRj1zLwpPIMs5cWj6Zk71PbBeGkPdr5xXIxqWJIa2q49VSTbs/okjYyx6Fzxhp3JuokmpI7pyGuEYCBNAmjUuxa8UumBDes5XgZRz6BekwnV96eqg3w9VLQCRIK1+tHdFPHxYi0ZSDFCLRRjBU25NLbr5K7W64IEDaUwcldFLZaiOJIkwOQas2TvOyuEwPTUx+eJ9Yioe/m0xnCWYaXR+UiLYyTAVk7iwpuHe2cUL7ml60ZZcxKlxjFKslmQjwMPYhgIxoNcUm8uM8UPSCcqrUsPVleFoIvXScvFnRP/2XF6gQXPRlu/79DW3i2K0StdMMvGtaMg2D5PGk6ffeLzy8JxtRNru96mYEKUdzqh8uGXDTKcQ3f3pNSXDDNjL2IOAOLUWv6unN8QA6qvDepocGXtkgxf5sWh6Uv/VhprxNjKetVQsmFRNPhQ3pv3ZN9+Z3vE25Wu0jbZ3+xqLNp/dfyLDraZkhZKhfn5jlj1e3mZVO9EJaCFlER3TpXFc++vIaol2iQCxW97X8x8Wp/Wa+78oAraj0yE2IVRq0UljcP8fk0k6DXmhXDlqaN0IXZ+utT3qUU0DTns70Ry4Ccy5ZL/Z8DxsyJ66yySNUHJMWeiIFoZyIrco/x1xBL
+ properties :
+  x : 120
+  y : 50
+  width : 386
+  height : 249
+  widthClient : 384
+  heightClient : 217
+ controls :
+  -
+    name : STC_Title
+    identifier : 0x24f5dd501156ffba
+    internal_properties : CAAAAAgAAACX0zA5mjsv6k2JCwb6b1iGdzd9x8iZ5t9ZgdGZlsDC2GVpzbaSRVb4Izb7g2LL6oXKnDak0yV2CLpXUIPX3/CXLX4iMJpLPD9qbL/Tn4s4n0SVaYbqwuzphMzY2Dc5HaGHC2FZMFzzcEtfyhhsdgEydtT/fSVPl7B/TN36AC+ceMoAIR0zmNiSCZUJCvZgcJSiEzyKZfKj4N+M/G3YNQg6RrmexEpondqYZ3e7jVnmh8/OXKi0SA4DIza/1dTe0W2eID+ogg3erqBBJ3pxphjFWS6Yu5o3FI8+2klVUGyE5SNWsYzJgviTeviYkc8jNdlWL6axHXwT+ir2wowCzuHWajZ/zMC9n+DCaIw39czHyPslYTs+X8XjxGduGt1ZjlYjyNn3CzliwlSpHk97yBvg1kueiv5xEwYPFxXrXnFVhn/cDBQhM+EaFlZuqQhULGeTPqItlbc3TNetfnVJCotsMoiJeHqNeK4b1ZaWrzbqqzuakg==
+    properties :
+     x : 6
+     y : 17
+     width : 347
+     height : 20
+    type : 3
+    code_elements :
+     type_code : 2
+     p_codes :
+      -
+        code : |1-
+         
+        type : 18
+  -
+    name : IMG_ATT
+    identifier : 0x24f5dd501157ffba
+    internal_properties : CAAAAAgAAAAgCqefooaw12rKX6wSxMIvoPGFC1xXWWtsPF6gDaNSFryvEVzpfQ+UiYUiCVBKZexYQHDnaupICClBb41uZnf5MptE//RsD2uYLlHaPVL+3AtzNwFjkypS51ex8QnE1b1KQHzEfr1mq26/cO8OGnBSHQ72rLeVod5qzGCtF25pH8FYFcmeiC64H5BpXOXYi6uCLVjZhpR9Wsoqiz4Hb5rjy/J2kQ58hSJQBMY5gZTJTW4myeCtlNi421NhwvmevGvburQJ02DidcgpWAPZ6ZpR7MvuWdXq8IX7YyLX2svlmHrIh+uqRnsrWcBmOWExLYo8acbIi555gJ7fMHabZAvf9j+liqg6e2/F5upWum6/4CioSnbVrlBKtQg1D4eY83EjHVjOG7wRzl+uYDOQHFNPN63DPSF6LTbZRIhJeU1vWvpQa9DJOMSCMx3f4PBBSGkwWrm+HiOJLN2cfVN2e93J1ZOdaehymjruAiN4T9fUscUybSCje0HViPqffvKMKZaKEYJ6y+7SQKngkMcc+2LTO3xpYlwfVjg6AxPgHaA1LiC05KWsURFqxoaDG4KZZFBCLyM=
+    properties :
+     x : 17
+     y : 58
+     width : 63
+     height : 50
+    type : 8
+    code_elements :
+     type_code : 8
+     p_codes :
+      -
+        type : 18
+        enabled : false
+  -
+    name : LIST_ATT
+    identifier : 0x24f5dd501158ffba
+    internal_properties : CAAAAAgAAADnVGE6gRBVRJM1Gyekgkc2p2Fon9YmJd9R7AFLb3jYIGMOOUm9vmNHb2gpCGpW+4YnTZavjNzSIZrFu+dAyrrXsclFyt5ewMeBcJx/NeSszbeIQ7E7kFQONdf8ko6qWPLr60t/dHwzQzJKtDMgIro8hmv9dYty3164m/EcVpX2MBK1ZaBls6n+oRfc3SW62I+7zPIWgZRcxeZ5Kv4aNiOWLYdv77IyvhyBjW2lO0WJRPz/hMmUF+zN0GuWsnv5GDnlcYa31WB62BEBw6cpVkCLk4feoc91IYeFTO/825maFp/r8H+/eUpYqDvQqp3lxC8Ni+1XVMU9taWY1+mV/8VMeB7xKgu2cQqW3EJkvhXzrVkgY7u3jb3wsQ41ds9bAdix1EcnsOXa25tWY85CuJprMmN4WABreJAQSc0aLaktoAtuUxgLoD3OZrl23vvjYiLY4l1um7TCYV+fTZxwp+ukYiExa+h/bZIS7rhQNY8E4xH9IDaUFRHtoQ+IoeKTkfWqrwscto9HpRUJAnJRE7tGAIyiGWO4HIj7zoG0AQgG12oE2auVTRXzTVf01SUPO9+5e9xOQHovlIemlzsq0nUAyQJfpBGN+gUlU30vCuuy6Xc0yJbaGl2YkczUUu4YWUndxd1lAnAVRoR3bGaFa957nx/4QRJJAqwDVgVEhwpAvudqLNHpSG9X8q6q7Gap9XK1prDdyr9TeoSlZunuq+GSDqqP6UbTSheAwVqdenrpmF4AHw/aUAlKwByQc4+b7kgybTOFHh6hT8OJ5n7df/uYTbHSCK5z+oPLRbvUxnld8Byz5Tc4yIRgh4pZsRjNXfA2LEn0ULZkweKplrMxOd9tJnwHMOxH7YDF6jwQBZSIj+K39TCmrt9h6ZIk78eUp1Cmv7z8m1KqB4gRfyhHYtpFqNB/VE+xDqysILn8Y6a7Hqrk0CQOo24Sb/+L7LhYqDObRB7JFgvxGDOsZUIa3F+wiS5OnftEujAg9l3wRzMZdF9JAkQxI8AHyrNAOPbGI38qyx3QFmowH60ecd6CSvA=
+    properties :
+     x : 90
+     y : 58
+     width : 242
+     height : 106
+    type : 7
+    code_elements :
+     type_code : 7
+     p_codes :
+      -
+        type : 35
+        enabled : false
+      -
+        type : 22
+        enabled : false
+      -
+        type : 24
+        enabled : false
+      -
+        type : 23
+        enabled : false
+      -
+        type : 25
+        enabled : false
+  -
+    name : BTN_Add
+    identifier : 0x24f5dd501159ffba
+    internal_properties : CAAAAAgAAAAWXsgUmyUb+xbwEziY1aWpGiG6ugOdsuYiZIKdk0/WS8cXEdgpTTXUKGC7fMJB21SF6SiPxS9R2QRbIf4bUnw4dYJ+YONCwjvTEtouV4XBrIWbmyISVWh5vI5Kcb9tQYvtlQfBcvRw07j5asdDrmigSNuMyPdGSgWk9v6O2LmlLtrRZ9clgwKOShLb6HgNjxINZ+Mu8oVEYgfJQ1DLJTcKXIQkHAjdT7GGkGcTs/XYd+ZMYox33WIFUuvHphHivyVdpD8TocH93DduWZqQUiJv50/Fl5h6k7SI9UdJK9PX7oGQrjpCOnMlIcgF95HNIOMokaDDms2lCFRLUb/iLNLZuPNU5vRRDedPecaKHeFuMC1qjYm1psakwgwMu+PhPPpAF79tFYBwrLpaJCOHgQV19gW39XFIrpXjESI6zIvMF9Z9ZJ3YgjAFP4Vxu7wfsPxo/7TVXbAciaS3KqiwkHP1Nr/Ee/eiNuJCgL22jYe0eCjcN+msoGA3WgO3ZgEAa+bz+z+qRDGmC8i6w+tK5c652XqRztnMQprrQVyaGEpD8lygizx7iiyFPz3PVa6ivl9xh9jBvDezGx+gn4/yUfjybXMh3MexffuaLPp9vIiNZmHvq0OHJvblNY+QTi71w/TPEnuFOuAxKob0uQM1eDJR1PjIWC/aPxaVOymOw91srJlsXKpEGnRgPPdffF4DUh3D/dQyaKpaBiOJ0QCMSN3/SHg99N2XODQe
+    properties :
+     x : 339
+     y : 61
+     width : 27
+     height : 24
+    type : 4
+    code_elements :
+     type_code : 4
+     p_codes :
+      -
+        code : |1+
+         // Selecting the file
+         sFileName is string
+         sFileName = fSelect("","",<§$0000§>,<§$0001§>+TAB+"*.*","*",fselOpen+fselExist)
+         IF sFileName~="" THEN RETURN
+         
+         sName is string 
+         sName = fExtractPath(sFileName,fFileName+fExtension) // File name without path
+         
+         // Already found in the list
+         IF ListSeek(LIST_ATT,sName)>0 THEN RETURN
+         
+         // Add
+         gclMail:AddAttachment(sFileName)
+         ListAdd(LIST_ATT,sName)
+         
+        type : 18
+      -
+        type : 161
+        enabled : false
+  -
+    name : BTN_Delete
+    identifier : 0x24f5dd50115affba
+    internal_properties : CAAAAAgAAABrj56jWrK9uuBQP9xhWo8Y3FxLu50o101NZf3Ah4zJH62QocPJ8hur6vfwxDyrlVvuKPvC3Vl48OQCkhwtsL2W5pxbTCHFCSx7rBCRmGMEq2dcPPbrDIcuw0h4Me54FrckeGSYTFzoNkQy5RQDwWm1xqaT/eZZ6hqsLeb3pfvcYjntQvER3JAfawnTIAxXFUjnkQecRZpUWV6H7AzdS965Dmp16mHjf1mui8KOHp0UpiVVMZJqq6qlbWkoCQSSFNNs2gLisOVu5VsaliAXhAMEuDoaFISPeVoNGg2+Jw+spyQ/hXM3M+SLnygJK0mqdSOdTK1fnsVAEuAtWYaF/yTjLoruOMA7rTWpqL7wk5gmLhInM1IOMYE3GWrgPTztC7A39+7wdcI5wvEXR0iJBOduak3/CQ0ZtY627UZtdhGdq/61Dh+lbgykxY6EgMr+tAdR5363mHQUf5kYV1bxwQMUe1Iq4V/jwD7+656iBr4fudw1mjadNOO/QQ2MX8EySNFjTfz4tniw1vOEc7GQ/585RQQiKAQ4+I/xLisbjgRgdPyXSOlDosWpIZFgB3MLv9k13t4m56F1gWp1wSjweRgYLH86uirBvlz59ttGyonFNJLjBjYt8SS5VzPwWqJaHRPGFMI2SJO0WKUsk9+qySJbK60T8BVFRTgGzK1n/VxoYHGkpeLWrfAkr+Nt/YdNlLfaWWmqPfhJwSpH1UZk7/rUfdHbdhUzX/AqUq0q
+    properties :
+     x : 339
+     y : 90
+     width : 27
+     height : 24
+    type : 4
+    code_elements :
+     type_code : 4
+     p_codes :
+      -
+        code : |1+
+         IF LIST_ATT<1 THEN
+         	Error(<§$0002§>)
+         	ReturnToCapture(LIST_ATT)
+         END
+         
+         // Deletion
+         gclMail:DeleteAttachment(LIST_ATT[LIST_ATT])
+         ListDelete(LIST_ATT)
+         
+        type : 18
+      -
+        type : 161
+        enabled : false
+  -
+    name : BTN_View
+    identifier : 0x24f5dd50115bffba
+    internal_properties : CAAAAAgAAACuG35iRrhMmMJBvtt5rPlgPIVZ8/NtyV1bxT6Bjj97pOK/igntv6D8dmRe1aaNwD1RXOXFP5i1UHTgJ4sCfSMWM7NJhwpldjmAv5ZXyxhRbrUfRET3ICCeEK/04OkUXmXIcoU/Z9jnW7J+gfv9fqZ5nvnc0HI1F5StWzm3CMTNpFNllkuf68MKNpd1opn82CxMpqIccb1jd33N8CNdoOCsom4d0+a3B1sQsiGO5GzJhyMfpm1GqRtMCcuP5DPJBtNVhbdNeJg5BBWkSFI5Mfr9nVv3RuQhvql6D547WywF5U7ixAcJHgokvhqVHNxXs2HNP6b4ZQQ8Hsy2jV1wWSzz3kSj3ymPb/ChqkZbDAXabXlLMgeJVCGkG3ubSZa97bEeBiX/XpcXUdD+pt7dInyOI1T9gOH5+5mHPM3Mujq4qEMK7Q05dV0/DejNO2cndBLHwfVaAc8GOQS5bUyoXI9uk9et71KIPv15mQcpykB2imEAoFyS7Wpi1aLSbgBZdpjmQaxLsmJoYTqZVCccY4yJqB8hR92zzGkt4kKZBmdrUqwO/e1FdfnG6qlIBiMr18SqSj7zmnyLrtLVcMHA6lSdsqSqYfUVZeTgbS8xSUEkT7iDFcCxwllz7zxG3Xdst1ui/cyXZfbZn/zD8bjJJvjbp8w07dGjNsCjNwOOce0tBKpHnRMOmA4Z5nAS1YM8N0b6RQNAGY8NSHvOfEiTchQ2kSDJBP8f21Oy29InhqUWbvkIbNgeBE1k9IsOiCvMR7Bf4SV3zItrwRZB9RUMRkbCCQ+Dhra4Epg3moLmbBpVybK5Rg2HQmqHmzPY9FdJMN63jhqQWSnJM9K1+TeoIBudSJ1Qv7wE/ohg3BwHIpq0Xw8gWrQSUaJpbWdMI7QQErwFOYpLtb+npg==
+    properties :
+     x : 252
+     y : 172
+     width : 80
+     height : 24
+    type : 4
+    code_elements :
+     type_code : 4
+     p_codes :
+      -
+        internal_properties : CAAAAAgAAAA/27sAZbtQfW6SH/x+7p4rOKAehF2N+hGbzCLIhLM33/yhFS0KuZ8bNCu8QbPmNa7Dx83Lpm+MH4KHi4jJvfvOcNxKIN808oBIiWfaik4huNb7nuaoNJKdcHnIcNSaBR/olPMHSUzA+xHT8b4bOrwaocDMDEeu17SPUMgtg6Cwsw==
+        code : |1+
+         IF LIST_ATT<1 THEN
+         	Error(<§$0003§>)
+         	ReturnToCapture(LIST_ATT)
+         END
+         
+         sFile is string
+         SWITCH sMode 
+         
+         	//When creating a new email, no need to extract the attachment to view it.. 
+         	CASE CST_CREATION :
+         		sFile = gclMail:m_sTempDir+"\" + LIST_ATT[LIST_ATT]
+         		
+         		
+         	CASE CST_MODIFICATION :
+         		
+         		// Extract the attachment from the message
+         		gclMail:sExtractAttch(LIST_ATT[LIST_ATT])
+         		
+         		sFile = fExeDir()+"\ATT\"+LIST_ATT[LIST_ATT]
+         		IF fFileExist(sFile)=False THEN
+         			RETURN
+         		END		
+         		
+         END
+         
+         
+         
+         // Display with application associated with this file format
+         IF ShellExecute(sFile)=False THEN
+         	// if no application can be used to view this file format...
+         	Info(StringBuild(<§$0004§>, sFile), <§$0005§>)
+         END
+         
+        type : 18
+      -
+        type : 161
+        enabled : false
+ menu :
+  name : _Menu
+  identifier : 0x28299578e0bad0db
+  internal_properties : CAAAAAgAAACCv199ARoPUfG3WAPSG9eefhOOjWMQrs8CrX6cGGGJPoSHWBq4PXhStOWc1YnAZMZ5+EFR1WTDn8CTOTiyLnXPpAR5X8rsRkPZrm1yZeYDDt4kRzDPLbUf4Sh/mD3kd1D8V2drCFLmjeQhgpw7GKGwHRga+ZdjSqXGIC3LD1RracZ230hOmUJTj+ABDW4IHrw4PflmVGgp8E9KnAf/gselRrzEY90l3Cr9N00QijFYYrbrl4qF4kdim1YX6jYT4ezQhbJsU84ENZsxzq+o0JVHYQ8rxck600VhGV04/ao=
+  options : []
+ languages :
+  - en-GB
+ popup_menus : []
+ message_bar :
+  internal_properties : CAAAAAgAAAAuUSbMNsxgdbfFHY7ZVsciteTBltOyDyW0rRT97Ocyp+odAfxGKFSUQfEaAjCha6kOy0UPkbG9ZXlf+WwESWy8VwwySssS40eEjAR8dkpQW/IbvtSAUPdcXBrjmr2qBRY=
+ actionbar : {}
+ code_elements :
+  internal_properties : CAAAAAgAAACr/EYP2ohItBkOVauYQT1LQBqnaV6opmyoTzjLYClrU7VEZDruPbP0hs01+uhIGaa+O8PBJTAdFc+hYn+VXbZV35Lf40xH
+  type_code : 1
+  p_codes :
+   -
+     code : |1-
+      PROCEDURE WIN_EmailAT(gclMail is cMail, sMode=CST_MODIFICATION)
+      
+      
+      GLOBAL
+      	gbOK is boolean
+      	
+      	// Display the list of attachments
+      	// NOTE: 
+      	// ATT=incoming attachments
+      	// AT2=attachments to send (by default: the received ones)
+      	
+      SWITCH sMode 
+      	CASE CST_MODIFICATION : //Case for viewing an incoming message
+      		FOR i=1 _TO_ gclMail:m_nNbATT
+      			ListAdd(LIST_ATT,gclMail:m_parrATT[i])		
+      		END
+      		
+      	CASE CST_CREATION : // Case for creating a new message
+      		FOR i=1 _TO_ gclMail:m_nNbATT2
+      			ListAdd(LIST_ATT,gclMail:m_parrATT2[i])		
+      		END
+      END
+      
+      // Create the working directory if it does not exist
+      gclMail:TemporaryDirectory(fExeDir()+"\ATT")
+   -
+     type : 180
+     enabled : false
+   -
+     type : 230
+     enabled : false
+   -
+     code : |1-
+      
+     type : 40
+   -
+     code : |1+
+      RESULT gbOK
+      
+     type : 2
+   -
+     type : 11
+   -
+     type : 12
+   -
+     type : 17
+   -
+     type : 13
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : mails_pj
+resources :
+ string_res :
+  identifier : 0x3c0216ab49a268f2
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+  strings :
+   -
+     text :
+      en-GB : Select a file...
+     index : 0
+   -
+     text :
+      en-GB : All files (*.*)
+     index : 1
+   -
+     text :
+      en-GB : Select the attachment to delete.
+     index : 2
+   -
+     text :
+      en-GB : Select the attachment to view.
+     index : 3
+   -
+     text :
+      en-GB : Attachment saved as <%1>
+     index : 4
+   -
+     text :
+      en-GB : The file name was copied to the clipboard.
+     index : 5
+custom_note :
+ internal_properties : CAAAAAgAAAC68/W0/adbG0nFCRhrE42B5HRnbDzVHaz86sSQyxlBk7I=
+rad :
+ internal_properties : CAAAAAgAAABoAN7PLpwJW3EiA7WVZdCA5EwrCA1rvutcDHooMWKe

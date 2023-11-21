@@ -1,0 +1,150 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : Template_Form
+ major_version : 28
+ minor_version : 0
+ type : 18
+ description : ""
+ subtype : 0
+window :
+ name : Template_Form
+ identifier : 0x24f5dd6112c5431f
+ internal_properties : CAAAAAgAAADYx6huqPYoNu62Fr2E5yPe74KtBzTrOQv6mdWqODqEPRosyhjpOHh/eiRHdkIZUyMM8TJ+Br0QtxCWhkQ1XZJRNSv0Ii/Q4pP8Hc1ZIb7y5Ttc9537EqwBS+kQLf+aotXdVubOvRuw/tRXzfUPoDWYj/oh6LlTEzsVNVYjktlMxbv0RfwS+p+eKPhe/tjT9PlZLovsB9Zq3on3vJYukn3XldQZ3DBUpMCI1itG1PnZpuFGWvvJfcbTiGZDH0EOcUAIqbK/CCyLew8MR/kwc8Txgjc9gXZ7o7cOzq0ut0Xif5OIjbb2tw4/82W9RSRVu7AUOmzS75hZEiyxl/EtEJBYxN8oG56JTa0mbE6xG2ZsQ2s2hp64RY8cjeXlXmrytyCrtnK2UzR/7HrovlMimMZN3pPQhfRfiRQQ7Zf0jx8V3QzlUC87dVwvY0AUlgacaPTKeUZ4SDHy7Aqg4lEFssaRpu3UAfaj3h1pGWAaOsO//umeBtrJ/yXll1/DDUYL4siJxZf+yXrOh5XEtZ0+pb878KeLw7WcXrZFzdWzwhCxTRKW5t8KozOQBDFhHgEsgQMuUtNn2oXkruAeGqdGXfLCVhdSNUvwn69O372wcw3RyCHsoGmlsAtNU07O0g3YZdvopTnHN0ZJ4LdUwJHOwnJSyFJi5uzkriKU5r7uYrKQdpIEiRXyIp/lIZ/xLWtIjjhfOim4Kk+qFUUVQlBRCOlBQLcXpLSzTI3tqWN9UXzrh2zoj70NWnBYpNlYRHZ18FDxLX74ox7oveSI1hKFgQp4jAx0+ovrR7oymVoWSWo=
+ properties :
+  x : 120
+  y : 50
+  width : 1020
+  height : 772
+  widthClient : 1018
+  heightClient : 740
+ controls :
+  -
+    name : BTN_OK
+    identifier : 0x24f5dd6112c6431f
+    internal_properties : CAAAAAgAAABkKUV1/A3jMoCV9qwYohJNmUHTv4j+0E+jN02vYe0y4DBFS+w8hHfZ3kIFfyqsPH1LJQTtAuzm4Gv4vTg3yxnNu3kDAFxIuPoc6gHkPh3PEKcg4Qs/in9cuUvA7WaVHpWJX26HXw1jpPDp2GADDUxq9Gxp6x6DDyYV4rjrA79V3h34EltGYvOtwAhcCv/lv7fdbaaiBi8C+y8A0UEuGdlS8ddLcrqnxpQB0UnQHLDomwffr1PT5Q8790XMcJSkiahdEEcPlOU9N4fzOJpf39BPl+7Xz/1wUFYZvdd24J07nmrRxwsmPSt3Gw0HnxruGpge0kdd0A/Lf19NWTj9/SnK5T46OCW780Wy36BRQT7BtgCuWZ2Qf5Bu+eseBM6ipvl7ysGFdkXFDFUAJy2cFKzCj02WmX+tBUemhqi+IMu2pt0J9TidmeFNFc8JT6yHIxItg3joj7aKjJze0uW4nxVPvU27DYz8/B6MoY34Fzwd0Re+mCFiAwGalmHV66RUc5bQxBdMPL87kIgIZjuuRWrcOO0f6m8uRbKwVblfhQ+y4hQexIvqCdbiyUlkFWYfSMCu4wnEA2o8QClf5wjP+KmNBNID2RK/6eCR0XIwn33ErR4Zs1BvGRNtHpzee8YeVMRoxCc4/jzssKkbHgRd/QCfjeUSDC4i3+CfT00qGdmTahow0ZH9tQL/HP2EJp8511n62TXdTMjPTX/wAZ1reGC/tXsIff+pumeGDOD8u7wCYX+uisV8e9IJs6+r0LRexSe7w2c0i4iQ6CcocoE97muz8VNRso82BdHK7cBP81Z9Nsq86s7QoRfoWkfC6Rx68pt41LWZM6mI6RNdaCIWJ7U6A9IvDjbrJ0KOIAl/87I7+QUBH2Ix6X3fKI1OG/WJFFtKVT9ICx6irPYNxQ==
+    properties :
+     x : 829
+     y : 692
+     width : 80
+     height : 24
+    type : 4
+    code_elements :
+     type_code : 4
+     p_codes :
+      -
+        code : |1-
+         gbOK=True
+         Close()
+        type : 18
+      -
+        type : 161
+        enabled : false
+  -
+    name : BTN_Cancel
+    identifier : 0x24f5dd6112c7431f
+    internal_properties : CAAAAAgAAAA+M8fBZp5j6zBOjvtE+bE2YUSeJPbjCcm6Mo2iG+uIX1SysE+LwxtC0Jg5ObXlDAbDmFcX6tctwHjA1jegMoN9PwW5mWe7880Jn0tlgK7IQH/amOW2hQuBJGNDP/mzrBisfRD1N9plt78nOGayYZN7RxntoaPO18Jg2TdaYEMnAizwpdIsR5TTHrrThKEGy+E3P1eVa+5OmpyQb5lTQe1pz+3M3ozhc9XN8f1i40ndAwE5T5d6aJxsISKEITTstVbt6TQVnuQaTawKAhzzaQXW+1QPQkP5XUQilpRHS9tBPAPLzmMEaYM3fb67Z2B7XI4W5l1glwSAIWgu1nJOSaMyYxTyDJLZ43CyrAnSS1h9SPGKi8J5+zGeEZuBkHYANi+jalPckrVI/zcJPAszyIcztzXW0pI/VVPSoAvYvegvzPEasKcrMcIorVNJWmXq4+GzAqKxd7ZCjd8DanCAf2Y3e7dLgc54wL4BkigjL7jlECAQIsKVOTZBTXRXOnwMT11w6khDr1IXkwlhh0b/3TEnOul7gooiJk0RX2UiPaY9Ve4JLTuJZpSdwlQXC6t3514uA8WqsnHrWQoZLCoIJECBIi4wfDVi/5g3FE99+ynbb7oa+zCtovsnk3EzJQQE4UleXwl7uJdM24DZvV4xh0RodISS/e0tryMy8lQPGyL1sbKpAlKhsAUxj0I16LiuHTvUTLIbxLjkvKx14EWR2fq1nWAGRGPqJpDd0mqidSzffBRxabaCqxE4rqSOGD55ogwq11Xbf+JW8nAZqLOe2E1TzlJCouIaOgb93de0WlK9oRZCehz+ER/f1DdhPMaQAhSJL7Zz+bNCQ6ZBhY80LSqTeD/Qz3DUphVStZy3ayt5Zmr2Osd5UyldE/AgFnFPyNkZUbJ/dtwEpjGcJT6H20V8q4DMTGLOfv3cNA==
+    properties :
+     x : 915
+     y : 692
+     width : 80
+     height : 24
+    type : 4
+    code_elements :
+     type_code : 4
+     p_codes :
+      -
+        code : |1-
+         
+         
+         Close()
+        type : 18
+      -
+        type : 161
+        enabled : false
+  -
+    name : STC_Title
+    identifier : 0x24f5dd6112c8431f
+    internal_properties : CAAAAAgAAABuBeLCrJ/KN1L8ajRJiAPTqvoffr40Zuq12I60Scdo04PYpZAdnuuvWXbzST2tDwwbqyTDb9EJ8zWBGYoBG1Etz6o54MiahBlzYi3SWmyzWDPrftzJbYuamyXlEBE0xdM33XZFZfsldL7T9Rjkiysc9KOItEz1Yn82WZxoCPOirBK/mpPWJI+nbWbO1ekUHM5U3EVulgY34LU0ecL5Aw4/bg5yDoehgvHDtlqk0+ZQiyy4RbkaWyrgC8kFdtwL00qhtLlqmh9d6Ac5z9dUYgs4X2chM7d4MmyLn5WABbvSIBgeteY03+at7Ty207U5kPg466Vb2UnL3Q9w2LS9ZRqVpZeZFCZpWnUdlUlCJ353brAidI5KLfoZxcD9WndrZzLnMybwsXiqcx9K5I6FhV+Yq9I9rtJb3J0ZPHLXkVm/TZUDxjoknk7uDZPLnZrSOedSs/eSgCRX3w3QTF1sfwvpuK3ewxE8Fsytby1I+9g=
+    properties :
+     x : 15
+     y : 15
+     width : 390
+     height : 29
+    type : 3
+    code_elements :
+     type_code : 2
+     p_codes :
+      -
+        code : |1-
+         
+        type : 18
+ menu :
+  name : _Menu
+  identifier : 0x2829976d06bb744b
+  internal_properties : CAAAAAgAAACCv199ARoPUfG3WAPSG9eefhOOjWMQrs8CrX6cGGGJPoSHWBq4PXhStOWc1YnAZMZ5+EFR1WTDn8CTOTiyLnXPpAR5X8rsRkPZrm1yZeYDDt4kRzDPLbUf4Sh/mD3kd1D8V2drCFLmjeQhgpw7GKGwHRga+ZdjSqXGIC3LD1RracZ230hOmUJTj+ABDW4IHrw4PflmVGgp8E9KnAf/gselRrzEY90l3Cr9N00QijFYYrbrl4qF4kdim1YX6jYT4ezQhbJsU84ENZsxzq+o0JVHYQ8rxck600VhGV04/ao=
+  options : []
+ languages :
+  - en-GB
+ popup_menus : []
+ message_bar :
+  internal_properties : CAAAAAgAAAAgEGb1tUo4GfLrB30B56s9au7KA67+m2+OBLYxbhmnng3eleQt+RHTinQMjK0O8L238lYXr4r6OQI3ejvXUIF8Ec9CF4/aWQHbirE1EXNO9TThs7luVHwRKFt8Zw==
+ actionbar : {}
+ code_elements :
+  internal_properties : CAAAAAgAAACfM0CUWsWGhBslJ837rQ2fDbfapBrvbXInRC+qGwD1LlW/ybGU/b4NQYBeRtfldYOeCJojVZAvsr2DJVuXwzgV3/o8tm3FqwCzmWzZVRsPGkElwN0eNNQSFpP/vYcAEB7Km9wdwyjNHdn3FMqYuv/oz3AGUb/JPKzHs7qB8Zy9gjqMQ2ypPbJpaMOShnIb1GVma5zgPlCeQ2uzxQrLMKB5Ljc8vE8Wa9fUTnVFIVUCE5nh2pdVnG70T321BWOsayYpArYNvzG/MX7jrO/vj5jtEuQcPLTKv+OIKOLiAg==
+  type_code : 1
+  p_codes :
+   -
+     code : |1-
+      GLOBAL
+      gbOK is boolean
+   -
+     type : 180
+     enabled : false
+   -
+     type : 230
+     enabled : false
+   -
+     code : |1-
+      
+     type : 40
+   -
+     code : |1-
+      
+     type : 2
+   -
+     type : 11
+   -
+     type : 12
+   -
+     type : 17
+   -
+     type : 13
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : calendrier_fic
+resources :
+ string_res :
+  identifier : 0x1829976d09d3744b
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+  strings :
+   -
+     text :
+      en-GB : Specify the subject of the task that must be saved in Outlook.
+     index : 0
+   -
+     text :
+      en-GB : Enter the task that must be saved in Outlook.
+     index : 1
+   -
+     text :
+      en-GB : Enter the date.
+     index : 2
+   -
+     text :
+      en-GB : Date before than the start.
+     index : 3
+custom_note :
+ internal_properties : CAAAAAgAAAC68/W0/adbG0nFCRhrE42B5HRnbDzVHaz86sSQyxlBk7I=
+rad :
+ internal_properties : CAAAAAgAAABoAN7PLpwJW3EiA7WVZdCA5EwrCA1rvutcDHooMWKe

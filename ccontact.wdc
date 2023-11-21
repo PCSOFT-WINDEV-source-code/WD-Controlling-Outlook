@@ -1,0 +1,207 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : cContact
+ major_version : 28
+ minor_version : 0
+ type : 4
+ description : ""
+ subtype : 0
+class :
+ identifier : 0x3c0216a952a7638c
+ internal_properties : CAAAAAgAAAB2/vstTMCJbS/hlxjFxirSqKvCUuv8YxgpWyl7S3iA
+ code_elements :
+  internal_properties : CAAAAAgAAABm4PVFe9JAHaoZ7pWrapr167xJBrSdz0axAnnnfYhOQaaZf6aFmw+87+hdnze0968KI3y7g0wMbri74fT3L3UE/39pGg==
+  type_code : 10
+  p_codes :
+   -
+     internal_properties : CAAAAAgAAAB3QRadKQo0IivASy6AC/iJ5zGkcMgRYx+rlpcs9NE3D5XgxlRzvAGhnP/PUHxKXS47jsJ8IFg8jhxTApdOEuB6Iyu+zasGCmpChPw2RMSKEDEDYmUo/agpLpbf9v3rWUpL72k7mEMiNjiaSxA=
+     code : |1+
+      // Class for emulating the "Contacts" folder of Outlook
+      cContact is Class
+      	inhérits of cEntity					// Inherits from the generic class for emulating Outlook
+      	
+      	m_sID is string				//Identifier of the contact
+      	m_sCategory is string			// Category
+      	m_sLastname is string				// Last name
+      	m_sFirstname is string			// First name
+      	m_sFullName is string		// First Name + Last Name
+      	m_sSurname is string			// Nickname
+      	m_sOccupation is string			// Position of the person in the company
+      	m_sCompany is string			// Company
+      	m_sService is string			// Service
+      	m_sOffice is string			// Office
+      	m_sADDBusiStreet is string			// Street (business address)
+      	m_sADDBusiZC is string			// Zip code (business address)
+      	m_sADDBusiCity is string		// City (business address)
+      	m_sADDBusiState is string		// State/Region/County (business address)
+      	m_sADDBusiCountry is string		// Country (business address)
+      	m_sComment is string		// Comment
+      	m_sOfficePhone1 is string		// Office phone # (1)
+      	m_sOfficePhone2 is string		// Office phone # (2)
+      	m_sOfficeFax is string			// Office fax #
+      	m_sCellPhone is string		// Cell phone
+      	m_sHomePhone1 is string			// Personal phone # (1)
+      	m_sHomePhone2 is string			// Personal phone # (2)
+      	m_sEmail is string				// Email address
+      	m_sEmailType is string			// Type (SMTP in most cases)
+      	m_sWebSite is string			// WebSite URL
+      	
+      END
+      
+      
+     type : 131072
+  procedures :
+   -
+     name : Constructor
+     internal_properties : CAAAAAgAAADD5xXwfNmdH7pA7IYEKVxFiRRPuW9W5q4tzcPZrtzshLRpnc/0JYIpv/IBdhomLNWMBLRd54xkB4pCYFRX/WQXak2BBKEz/x/Rok0W1PiBertXAKTPI/HCQaFj90ohcWS1XQXNoGuoRoFxdnbtkEMKCN1fE9T7Lsd79c0+GrmcDR/21gPe4JO400QRwTfzAFxW0g==
+     procedure_id : 4324043508761256844
+     type_code : 27
+     code : |1+
+      PROCEDURE Constructor(MyItem = Null, clList = Null)
+      
+      // Call to the constructor of the parent class
+      // to initialize the dialog with Outlook
+      Constructor cEntity(::CST_CONTACTS, MyItem)
+      
+      //This defines the list to which the element belongs
+      //If this element is modified or deleted, we know which list to update..
+      IF clList <> Null THEN :m_clList = clList
+     type : 589824
+   -
+     name : Destructor
+     procedure_id : 4324043507914138508
+     type_code : 28
+     type : 655360
+   -
+     name : AllocateProperties
+     internal_properties : CAAAAAgAAAA82ZpM3iB8KZXLY3haIxhrsKUiMQts9yrEb7q0L8XhxqHS+NfPsZ/8SR6tm5vrK5zpVtRoGuA+B0BJblvD1vRLDUcAsdppqbva0ePjOKGJIG7KtE3Pn3ddZFBvIOLEF6yGkA32FMMKfQoKzFXDlYUiZUipdtKpvhbU3vXPpCSieUzBPPwwmifNbs9hFswwn+l4
+     procedure_id : 4324043521483894641
+     type_code : 12
+     code : |1-
+      // Summary: Assign the Outlook properties according to the values entered in WinDev
+      // Syntax:
+      // AllocateProperties ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	None
+      
+      PROCEDURE VIRTUAL AllocateProperties()
+      
+      
+      WHEN EXCEPTION IN
+      	// Category
+      	:m_pautItem>>Categories = :m_sCategory
+      	// Last name
+      	:m_pautItem>>LastName = :m_sLastname
+      	// First name
+      	:m_pautItem>>FirstName = :m_sFirstname
+      	// First Name + Last Name
+      	:m_pautItem>>FileAs = :m_sFullName
+      	// Nickname
+      	:m_pautItem>>NickName = :m_sSurname
+      	// Position of the person in the company
+      	:m_pautItem>>JobTitle = :m_sOccupation
+      	// Company
+      	:m_pautItem>>CompanyName = :m_sCompany
+      	// Service
+      	:m_pautItem>>Department = :m_sService
+      	// Office
+      	:m_pautItem>>OfficeLocation = :m_sOffice
+      	// Business address
+      	:m_pautItem>>BusinessAddressStreet = :m_sADDBusiStreet
+      	:m_pautItem>>BusinessAddressPostalCode = :m_sADDBusiZC
+      	:m_pautItem>>BusinessAddressCity = :m_sADDBusiCity
+      	:m_pautItem>>BusinessAddressState = :m_sADDBusiState
+      	:m_pautItem>>BusinessAddressCountry = :m_sADDBusiCountry
+      	// Comment
+      	:m_pautItem>>Body = :m_sComment
+      	// Tel/fax
+      	:m_pautItem>>BusinessTelephoneNumber = :m_sOfficePhone1
+      	:m_pautItem>>Business2TelephoneNumber = :m_sOfficePhone2
+      	:m_pautItem>>BusinessFaxNumber = :m_sOfficeFax
+      	:m_pautItem>>MobileTelephoneNumber = :m_sCellPhone
+      	:m_pautItem>>HomeTelephoneNumber = :m_sHomePhone1
+      	:m_pautItem>>Home2TelephoneNumber = :m_sHomePhone2
+      	// Web
+      	:m_pautItem>>Email1Address = :m_sEmail
+      	:m_pautItem>>Email1AddressType = :m_sEmailType
+      	:m_pautItem>>WebPage = :m_sWebSite
+      DO
+      	delete :m_pautItem
+      	Error(ExceptionInfo(errSummary))
+      	ReturnToCapture()
+      END
+     type : 458752
+   -
+     name : FillContact
+     internal_properties : CAAAAAgAAAApT99BYqM3TYZaqIqG+8RttabvgQEorKSJb78h1PIoAASvrb8Oj6inm+xVgqSQ3M3QVlAROW6SUc6MrPApn7gjykM9kKM19ZEl4S59TU+icYyCeTswuopJVoC0rjNYshMaFJKwvRb9cdIkW4kqY/T5rTTEPrkm43agxAbNS0iBcOzFY4ZDO6iTfL9edFAayFy8uA==
+     procedure_id : 4324043520777940869
+     type_code : 12
+     code : |1-
+      // Summary: Retrieving the properties of the contact that was read previously
+      // Syntax:
+      // FillContact (<clList>)
+      //
+      // Parameters:
+      // 	clList: List to which the element belongs
+      // Return value:
+      // 	None
+      
+      PROCEDURE VIRTUAL FillContact(clList)
+      
+      
+      // Automatic identifier managed by Outlook
+      :m_sID = :m_pautItem>>EntryID
+      // Category
+      :m_sCategory = :m_pautItem>>Categories
+      // Last name
+      :m_sLastname = :m_pautItem>>LastName
+      // First name
+      :m_sFirstname = :m_pautItem>>FirstName
+      // First Name + Last Name
+      :m_sFullName = :m_pautItem>>FileAs
+      // Nickname
+      :m_sSurname = :m_pautItem>>NickName
+      // Position of the person in the company
+      :m_sOccupation = :m_pautItem>>JobTitle
+      // Company
+      :m_sCompany = :m_pautItem>>CompanyName
+      // Service
+      :m_sService = :m_pautItem>>Department
+      // Office
+      :m_sOffice = :m_pautItem>>OfficeLocation
+      // Business address
+      :m_sADDBusiStreet = :m_pautItem>>BusinessAddressStreet
+      :m_sADDBusiZC = :m_pautItem>>BusinessAddressPostalCode
+      :m_sADDBusiCity = :m_pautItem>>BusinessAddressCity
+      :m_sADDBusiState = :m_pautItem>>BusinessAddressState
+      :m_sADDBusiCountry = :m_pautItem>>BusinessAddressCountry
+      // Comment
+      :m_sComment = :m_pautItem>>Body
+      // Tel/fax
+      :m_sOfficePhone1 = :m_pautItem>>BusinessTelephoneNumber
+      :m_sOfficePhone2 = :m_pautItem>>Business2TelephoneNumber
+      :m_sOfficeFax = :m_pautItem>>BusinessFaxNumber
+      :m_sCellPhone = :m_pautItem>>MobileTelephoneNumber
+      :m_sHomePhone1 = :m_pautItem>>HomeTelephoneNumber
+      :m_sHomePhone2 = :m_pautItem>>Home2TelephoneNumber
+      // Web
+      :m_sEmail = :m_pautItem>>Email1Address
+      :m_sEmailType = :m_pautItem>>Email1AddressType
+      :m_sWebSite = :m_pautItem>>WebPage
+      
+      :m_clList = clList
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+resources :
+ string_res :
+  identifier : 0x3c0216a928d7638c
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : CAAAAAgAAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ

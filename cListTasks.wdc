@@ -1,0 +1,86 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : cListTasks
+ major_version : 28
+ minor_version : 0
+ type : 4
+ description : ""
+ subtype : 0
+class :
+ identifier : 0x14f5dd5a05212708
+ internal_properties : CAAAAAgAAAB2/vstTMCJbS/hlxjFxirSqKvCUuv8YxgpWyl7S3iA
+ code_elements :
+  internal_properties : CAAAAAgAAAADZD6XckDmkRCRLu2nsOng/fVh93rdkfyLWloBGk2BRem4TF+3frCDA0qCQY+16IpNuui8Z5VZ0e4XMOoXksBndypna7Tf
+  type_code : 10
+  p_codes :
+   -
+     code : |1+
+      cListTasks is Class
+      	inhérits of cListEntities
+      	
+      END
+      
+     type : 131072
+  procedures :
+   -
+     name : Constructor
+     internal_properties : CAAAAAgAAACCKzZ8QDh5mn3O4ap4lO8U92KowqkC9GKxfGdOI0lyaP68dI6x1PvF1F2UQW7JlyEPOASKTNINFIbvdB5yLCaS3ZTp6YJ0moqTUJpVfWJDiRwOQcTT66ahnGvRBm0PgSjQu/G8gibuPeJvTyfQx4x5FI4h5RzAjxC6sS3Y0+1zteYee1TWosiRQ+Ydw3/1l9ARg/QYbL1oDMyN9Sq7Zw3pW54P+A==
+     procedure_id : 1510356628755588872
+     type_code : 27
+     code : |1+
+      PROCEDURE Constructor()
+      
+      // Call to the constructor of the parent class
+      // to initialize the dialog with Outlook
+      Constructor cListEntities(::CST_TASKS) 
+      
+      //List of Outlook tasks
+      :m_parrRubriques=new array of 0 cTask
+     type : 589824
+   -
+     name : Destructor
+     procedure_id : 1510356628755654408
+     type_code : 28
+     code : |1+
+      PROCEDURE Destructor()
+      
+     type : 655360
+   -
+     name : AssignItemArray
+     internal_properties : CAAAAAgAAAC+8dklpovi05qd3sdM6mvKJh7QR8U8aGRZJaHBk6074Xh+7KxhAkveH7X1x6dnGl/4ZmQQheTNcqdHgy6jNK31bEZZPNyP+0/aUMXxFKdDTLDvkMDOHrsF0qN1iaYxusBizYP7hcRC8fBz7trlPEZ03yXNiUFgJD44xaF2wNAajX1g/r5ntV3lf6hoNjev2ss8+1gvrAskwhjIl5TEDpmq
+     procedure_id : 1510356628755719944
+     type_code : 12
+     code : |1+
+      // Summary: Stores in memory (in an array) the list of Outlook tasks
+      // Syntax:
+      // AssignItemArray (<i>)
+      //
+      // Parameters:
+      // 	i: Subscript in the array of the task that must be added
+      // Return value:
+      // 	None
+      
+      PROCEDURE VIRTUAL AssignItemArray(i)
+      
+      //Create a new Task instance
+      clCurrentTask is cTask(:m_pautItem) 
+      
+      //Assign its members with the information read in Outlook
+      clCurrentTask.FillTask(object)
+      
+      //Add the task into the array at the specified subscript
+      :m_parrRubriques[i] =  clCurrentTask
+      
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : cListeTaches
+resources :
+ string_res :
+  identifier : 0x1a2e87310a1c3951
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : CAAAAAgAAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ

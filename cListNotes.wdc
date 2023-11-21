@@ -1,0 +1,85 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : cListNotes
+ major_version : 28
+ minor_version : 0
+ type : 4
+ description : ""
+ subtype : 0
+class :
+ identifier : 0x14f5dd580509214d
+ internal_properties : CAAAAAgAAAB2/vstTMCJbS/hlxjFxirSqKvCUuv8YxgpWyl7S3iA
+ code_elements :
+  internal_properties : CAAAAAgAAABm4PVFe9JAHaoZ7pWrapr167xJBrSdz0axAnnnfYhOQaaZf6aFmw+87+hdnze0968KI3y7g0wMbri74fT3L3UE/39pGg==
+  type_code : 10
+  p_codes :
+   -
+     code : |1+
+      cListNotes is Class
+      	inhérits of cListEntities
+      	
+      END
+      
+     type : 131072
+  procedures :
+   -
+     name : Constructor
+     internal_properties : CAAAAAgAAADC63Y8kFgZ+n0OAQr41M/UV0JIosmi1IJxPMeuY8mSqN4c1C5RtNvlFB104S7Jt+FvmKTq7PLttMYvFH4ybIYSPfRJieKUOmqTEHq1/eLjSbwu0ZSj25bRLBuhVl3/cTjAy4EM0hbeLfKf37fAtzxJxN6xtWywf0BKIT0oA52jRRbuS+RmUngB05ZtU+9lRyDB0wRoPO2Y/Ny9Bfprlz2pm15POA==
+     procedure_id : 1510356620164079949
+     type_code : 27
+     code : |1+
+      PROCEDURE Constructor()
+      
+      // Call to the constructor of the parent class
+      // to initialize the dialog with Outlook
+      Constructor cListEntities(::CST_NOTES)
+      
+      //List of Outlook notes
+      :m_parrRubriques=new array of 0 cMark
+     type : 589824
+   -
+     name : Destructor
+     procedure_id : 1510356620164145485
+     type_code : 28
+     code : |1+
+      PROCEDURE Destructor()
+      
+     type : 655360
+   -
+     name : AssignItemArray
+     internal_properties : CAAAAAgAAAB+sRnl5ssiE9pdHgeMqquKZl6gxyU8CMSZheGhc+0bQfherOzBQqs+H5V1p0cner94xmSQpWStEudng06DdI3VrOYZfLwPG6+acMVRdKdjbMD/oPA+Dst1orOleVaBKpByXRNrtTTSYcCD3sqVjLbEr3Wd+fFQ9C4IFZGmsOAKXc0wzm5XJW3VTzgYpqfvGot8u5hvbEtkgtgIV9QEzlnq
+     procedure_id : 1510356620164211021
+     type_code : 12
+     code : |1+
+      // Summary: Stores in memory (in an array) the list of Outlook notes
+      // Syntax:
+      //AssignItemArray (<i>)
+      //
+      // Parameters:
+      // 	i: Subscript in the array of the note that must be added
+      // Return value:
+      // 	None
+      
+      PROCEDURE VIRTUAL AssignItemArray(i)
+      
+      //Create a new Note instance
+      clCurrentMark is cMark(:m_pautItem) 
+      
+      //Assign its members with the information read in Outlook
+      clCurrentMark.FillNote(object)
+      
+      //Add the note into the array at the specified subscript
+      :m_parrRubriques[i] = clCurrentMark
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : cListeNotes
+resources :
+ string_res :
+  identifier : 0x1a2e7c70043d3895
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : CAAAAAgAAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ

@@ -1,0 +1,152 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : cMark
+ major_version : 28
+ minor_version : 0
+ type : 4
+ description : ""
+ subtype : 0
+class :
+ identifier : 0x14f5dd5704f61c3f
+ internal_properties : CAAAAAgAAAB2/vstTMCJbS/hlxjFxirSqKvCUuv8YxgpWyl7S3iA
+ code_elements :
+  internal_properties : CAAAAAgAAABm4PVFe9JAHaoZ7pWrapr167xJBrSdz0axAnnnfYhOQaaZf6aFmw+87+hdnze0968KI3y7g0wMbri74fT3L3UE/39pGg==
+  type_code : 10
+  p_codes :
+   -
+     internal_properties : CAAAAAgAAADLrZLohZ4xRk9cb6rEj2ApQ13cLIhNM3ufkhPguCWPX+FMTriDILH9eLMTZGhGTd5XugrA4DT6PEYFsCXYmGb8tUl84/30EFBsduoETtrgMhMhgFty854/iFBVrI9p38zdDe+52i5tE8QWN2w=
+     code : |1+
+      // Class for emulating the "Notes" folder of Outlook
+      cMark is Class
+      	inhérits of cEntity				// Inherits from the generic class for emulating Outlook
+      	
+      	m_sID is string			//Identifier of the note
+      	m_sCategory is string		// Category of the note
+      	m_sContent is string		// Content of the note
+      	m_nColor is int	   	// Color of the note (Outlook color #)
+      	m_nWidth is int		// Width of the window displaying the note
+      	m_nHeight is int		// Height of the window displaying the note
+      	m_nX is int				// X-coordinate of the window displaying the note
+      	m_nY is int				// Y-coordinate of the window displaying the note
+      	
+      	CONSTANT
+      		olBlue		=0				// Blue
+      		olGreen		=1				// Green
+      		olPink		=2				// Pink
+      		olYellow	=3				// Yellow
+      		olWhite		=4				// White
+      	END
+      END
+     type : 131072
+  procedures :
+   -
+     name : Constructor
+     internal_properties : CAAAAAgAAADD5xXwfNmdH7pA7IYEKVxFiRRPuW9W5q4tzcPZrtzshLRpnc/0JYIpv/IBdhomLNWMBLRd54xkB4pCYFRX/WQXak2BBKEz/x/Rok0W1PiBertXAKTPI/HCQaFj90ohcWS1XQXNoGuoRoFxdnbtkEMKCN1fE9T7Lsd79c0+GrmcDR/21gPe4JO400QRwTfzAFxW0g==
+     procedure_id : 1510356615867866175
+     type_code : 27
+     code : |1-
+      PROCEDURE Constructor( MyItem = Null, clList = Null) 
+      
+      // Call to the constructor of the parent class
+      // to initialize the dialog with Outlook
+      Constructor cEntity(::CST_NOTES, MyItem)
+      
+      //This defines the list to which the element belongs
+      //If this element is modified or deleted, we know which list to update..
+      IF clList <> Null THEN  :m_clList = clList
+     type : 589824
+   -
+     name : Destructor
+     procedure_id : 1510356615867931711
+     type_code : 28
+     type : 655360
+   -
+     name : AllocateProperties
+     internal_properties : CAAAAAgAAAAEF6czVIEd15RDmFUK5LPskvzQL1/2yphDu9dvaZ9nK2wK5ER/uFkiQR9zfR3RhnmQZsAE9y7Pcrld1TiFEuG/SBLl8EK9cc9IcjdfAkmbCmMaRVvBt1D6zaYaPJNcpdN9UBhWCKG/dnP2Q72OS7kPdqxGGMDpjbODkA7RmRddQIz3F13GborqXj+Z1ZCum9TJGGvEWfqTqT2W9T6uNPMA
+     procedure_id : 1510356615867997247
+     type_code : 12
+     code : |1-
+      // Summary: Assign the Outlook properties according to the values entered in WinDev
+      // Syntax:
+      // AllocateProperties ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	None
+      
+      PROCEDURE VIRTUAL AllocateProperties()
+      
+      
+      WHEN EXCEPTION IN
+      	
+      	// Category of the note		
+      	:m_pautItem>>Categories = :m_sCategory
+      	// Content of the note
+      	:m_pautItem>>Body = :m_sContent
+      	// Color of the note (Outlook color #)
+      	:m_pautItem>>Color = :m_nColor-1
+      	// Width of the window displaying the note
+      	:m_pautItem>>Width = :m_nWidth
+      	// Height of the window displaying the note
+      	:m_pautItem>>Height = :m_nHeight
+      	// X-coordinate of the window displaying the note
+      	:m_pautItem>>Left = :m_nX
+      	// Y-coordinate of the window displaying the note
+      	:m_pautItem>>Top = :m_nY
+      	
+      DO
+      	delete :m_pautItem
+      	Error(ExceptionInfo(errSummary))
+      	ReturnToCapture()
+      END
+     type : 458752
+   -
+     name : FillNote
+     internal_properties : CAAAAAgAAADkF0dhgotPCUOIRhy01Cp+j46yQaOZIVysEfrZ3vG/HW5dSoI8nPSUrhUV3VPZOd80OpEybthbGfxEmehdKPsNF3exRIH2MsBWobPcsEb0cjAWiHlTEz8lMJIhFpiGHaZQODXgJrHgU970PumPW39kBcq7eBwHJBwuUG9xhnm5+32PbGfMht2r1QGiPTQq8pip5P4GH/J/dX3Nu+68eaWhUA==
+     procedure_id : 1510356615868062783
+     type_code : 12
+     code : |1-
+      // Summary: Retrieving the properties of the note that was read previously
+      // Syntax:
+      //FillNote (<clList>)
+      //
+      // Parameters:
+      // 	clList: List to which the element belongs
+      // Return value:
+      // 	None
+      
+      
+      PROCEDURE VIRTUAL FillNote(clList)
+      
+      // Automatic identifier managed by Outlook
+      :m_sID = :m_pautItem>>EntryID
+      // Category of the note		
+      :m_sCategory = :m_pautItem>>Categories
+      // Content of the note
+      :m_sContent = :m_pautItem>>Body
+      // Color of the note (Outlook color #)
+      :m_nColor = :m_pautItem>>Color+1
+      // Width of the window displaying the note
+      :m_nWidth = :m_pautItem>>Width
+      // Height of the window displaying the note
+      :m_nHeight = :m_pautItem>>Height
+      // X-coordinate of the window displaying the note
+      :m_nX = :m_pautItem>>Left
+      // Y-coordinate of the window displaying the note
+      :m_nY = :m_pautItem>>Top
+      
+      :m_clList = clList
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : cNote
+resources :
+ string_res :
+  identifier : 0x3c0216a9656363fa
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : CAAAAAgAAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ

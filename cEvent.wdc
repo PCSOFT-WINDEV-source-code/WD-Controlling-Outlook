@@ -1,0 +1,162 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : cEvent
+ major_version : 28
+ minor_version : 0
+ type : 4
+ description : ""
+ subtype : 0
+class :
+ identifier : 0x14f5dd5504e2152d
+ internal_properties : CAAAAAgAAAB2/vstTMCJbS/hlxjFxirSqKvCUuv8YxgpWyl7S3iA
+ code_elements :
+  internal_properties : CAAAAAgAAABm4PVFe9JAHaoZ7pWrapr167xJBrSdz0axAnnnfYhOQaaZf6aFmw+87+hdnze0968KI3y7g0wMbri74fT3L3UE/39pGg==
+  type_code : 10
+  p_codes :
+   -
+     internal_properties : CAAAAAgAAACRY3S/O5X6FpFqh8hkb55fOct+DPZ3NxOxmJN+yAWJgbtuYMC9Wh2hMol/9tTqs5yJPMi0pmrNcYm4I1QpN8NfNj5PsiKPj4FTTf3LN/Hl7dxm3+abQgHw44MQ6+iAwCs65rpAf0rMVBq8bTY=
+     code : |1-
+      // Class for emulating the "Calendar" folder of Outlook
+      cEvent is Class
+      	inhérits of cEntity					// Inherits from the generic class for emulating Outlook
+      	
+      	
+      	m_sID is string				//Identifier of the event
+      	m_sCategory is string			// Category
+      	m_sSubject is string				// Subject
+      	m_sContent is string			// Content
+      	m_sStartDate is string   		// Start date
+      	m_sStartTime is string   		// Start time
+      	m_sEndDate is string   		// End Date
+      	m_sEndTime is string   		// End time
+      	m_bAlarm is boolean			// True if an alarm is requested
+      	m_nAlarmNbMinutes is int	// Alert n minutes before
+      END
+     type : 131072
+  procedures :
+   -
+     name : Constructor
+     internal_properties : CAAAAAgAAADlpyJ3GM97hvoyurHZ0+3wl1PqRdRkfQIPB6NfWY9CtGsoktf3Ut/sE+NQ0BZgEE294QSE5eyW5D7gTWVwqSRuZsUTZYA28CLcFlMXCo2sxnGLMvJ5MXOQyzMn62oBkTTleXNvDA+UkqVXFo5bAtfetMN7d3CvGh8DeU2+irqJIc52ruLsukMghFDYlmhIdw+i5lb/Jz3+KO76m8jN1W9MkFQ=
+     procedure_id : 1510356607276619053
+     type_code : 27
+     code : |1+
+      PROCEDURE Constructor(MyItem = Null, clList = Null)
+      
+      // Call to the constructor of the parent class
+      // to initialize the dialog with Outlook
+      Constructor cEntity(::CST_CALENDAR, MyItem)
+      
+      
+      //This defines the list to which the element belongs
+      //If this element is modified or deleted, we know which list to update..
+      IF clList <> Null THEN :m_clList = clList
+      
+     type : 589824
+   -
+     name : Destructor
+     procedure_id : 1510356607276684589
+     type_code : 28
+     type : 655360
+   -
+     name : AllocateProperties
+     internal_properties : CAAAAAgAAAA82ZpM3iB8KZXLY3haIxhrsKUiMQts9yrEb7q0L8XhxqHS+NfPsZ/8SR6tm5vrK5zpVtRoGuA+B0BJblvD1vRLDUcAsdppqbva0ePjOKGJIG7KtE3Pn3ddZFBvIOLEF6yGkA32FMMKfQoKzFXDlYUiZUipdtKpvhbU3vXPpCSieUzBPPwwmifNbs9hFswwn+l4
+     procedure_id : 1510356607276750125
+     type_code : 12
+     code : |1+
+      // Summary: Assign the Outlook properties according to the values entered in WinDev
+      // Syntax:
+      // AllocateProperties ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	None
+      
+      PROCEDURE VIRTUAL AllocateProperties()
+      
+      WHEN EXCEPTION IN
+      	// Category
+      	:m_pautItem>>Categories = :m_sCategory
+      	// Subject
+      	:m_pautItem>>Subject = :m_sSubject
+      	// Content
+      	:m_pautItem>>Body = :m_sContent
+      	// Start date
+      	IF DateValid(:m_sStartDate) THEN :m_pautItem>>Start = DateToInteger(:m_sStartDate)-DateToInteger("19000101")+2  + ((Val(:m_sStartTime[[1 TO 2]])/24) + (Val(:m_sStartTime[[3 TO 4]])/24/60))
+      	// End date (deadline)
+      	IF DateValid(:m_sEndDate) THEN :m_pautItem>>End = DateToInteger(:m_sEndDate)-DateToInteger("19000101")+2  + ((Val(:m_sEndTime[[1 TO 2]])/24) + (Val(:m_sEndTime[[3 TO 4]])/24/60))
+      	// Alarm
+      	IF :m_bAlarm THEN
+      		:m_pautItem>>ReminderSet=True
+      		// Alarm time
+      		:m_pautItem>>ReminderMinutesBeforeStart = :m_nAlarmNbMinutes
+      	ELSE
+      		:m_pautItem>>ReminderSet=False
+      		// Alarm time
+      		:m_pautItem>>ReminderMinutesBeforeStart = 0
+      	END
+      	
+      DO
+      	delete :m_pautItem
+      	Error(ExceptionInfo(errSummary))
+      	ReturnToCapture()
+      END
+     type : 458752
+   -
+     name : FillEvent
+     internal_properties : CAAAAAgAAAAYxXtMisDDAmsPijYKWTFb2X22F7Av4XYLsf8hrg37rO/qdbhawP+BPItq3GB6D/Ft1EcnITjQNwnDiQJLtBn0qbY627qk6oDzpOv/Bf+x/okammFb3DwbiNwMNztAERNMKXQVQLXMJzqWvlTU7JBSZm4U/Lyx2d72lOobybJLOsR63lOOtYzpGcXaDpkPWxlCCVFfdEtsTDHa2Mepam5yh9db
+     procedure_id : 1510356607276815661
+     type_code : 12
+     code : |1-
+      // Summary: Retrieving the properties of the event that was read previously
+      // Syntax:
+      //FillEvent (<clList>)
+      //
+      // Parameters:
+      // 	clList: List to which the element belongs
+      // Return value:
+      // 	None
+      
+      PROCEDURE FillEvent(clList)
+      
+      sDateTime is datetime
+      
+      // Automatic identifier managed by Outlook
+      :m_sID = :m_pautItem>>EntryID
+      // Category
+      :m_sCategory = :m_pautItem>>Categories
+      // Subject
+      :m_sSubject = :m_pautItem>>Subject
+      // Content
+      :m_sContent = :m_pautItem>>Body
+      // Start date
+      sDateTime=:m_pautItem>>Start
+      :m_sStartDate = sDateTime..Date
+      IF NOT DateValid(:m_sStartDate) THEN :m_sStartDate=""
+      // Start time
+      :m_sStartTime=NumToString(sDateTime..Hour,"02d")+NumToString(sDateTime..Minute,"02d")
+      // End date (deadline)
+      sDateTime=:m_pautItem>>End
+      :m_sEndDate = sDateTime..Date
+      IF NOT DateValid(:m_sEndDate) THEN :m_sEndDate=""
+      // End time
+      :m_sEndTime=NumToString(sDateTime..Hour,"02d")+NumToString(sDateTime..Minute,"02d")
+      // Alarm
+      :m_bAlarm = :m_pautItem>>ReminderSet
+      // Alarm time
+      :m_nAlarmNbMinutes=:m_pautItem>>ReminderMinutesBeforeStart
+      
+      :m_clList = clList
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : cEvènement
+resources :
+ string_res :
+  identifier : 0x3c0216a95b0a6350
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : CAAAAAgAAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ
